@@ -19,8 +19,13 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
-    }
+      "@/*": ["./*"],
+      "@/components/*": ["./components/*"],
+      "@/utils/*": ["./utils/*"],
+      "@/themes/*": ["./themes/*"],
+      "@/auth/*": ["./auth/*"]
+    },
+    "baseUrl": ".",
   },
   "include": [
     "next-env.d.ts",
