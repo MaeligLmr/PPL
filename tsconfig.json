@@ -25,7 +25,6 @@
       "@/themes/*": ["./themes/*"],
       "@/auth/*": ["./auth/*"]
     },
-    "baseUrl": ".",
   },
   "include": [
     "next-env.d.ts",

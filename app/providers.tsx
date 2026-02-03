@@ -11,10 +11,9 @@ type Props = {
 export default function Providers({ children }: Props) {
   return (
     <ThemeProvider>
-      {/* <AuthGuard>
+      <AuthGuard>
         {children}
-      </AuthGuard> */}
-      {children}
+      </AuthGuard>
     </ThemeProvider>
   )
 }
