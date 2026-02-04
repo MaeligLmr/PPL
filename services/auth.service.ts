@@ -19,3 +19,7 @@ export async function getSession() {
 export async function signUp(email: string, password: string) {
     return supabase.auth.signUp({ email, password })
 }
+
+export async function getUser() {
+    return supabase.auth.getUser()
+}
