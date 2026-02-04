@@ -1,6 +1,8 @@
 // app/layout.tsx
 import type { Metadata } from 'next'
 import Providers from './providers'
+import Menu from '@/components/layout/Menu'
+import './global.css'
 
 
 export const metadata: Metadata = {
@@ -17,6 +19,7 @@ export default function RootLayout({
     <html lang="fr">
       <body>
         <Providers>
+          <Menu />
           {children}
         </Providers>
       </body>

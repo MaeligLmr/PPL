@@ -1,0 +1,121 @@
+:root {
+    /* Spacing */
+    --spacing-5: 5px;
+    --spacing-10: 10px;
+    --spacing-15: 15px;
+    --spacing-20: 20px;
+    --spacing-30: 30px;
+    /* Radius */
+    --radius-10: 10px;
+    --radius-15: 15px;
+    --radius-17: 17px;
+    --radius-full: 1000px;
+    /* Typography */
+    --font-heading-large: 700 32px/40px 'Lilita One', sans-serif;
+    --font-heading-medium: 600 24px/32px 'Lilita One', sans-serif;
+    --font-body: 400 16px/24px 'Inter', sans-serif;
+}
+
+[data-color="blue"][data-mode="light"] {
+    --theme-button-primary-bg: var(--color-cyan-500);
+    --theme-button-primary-bg-hover: var(--color-cyan-600);
+    --theme-button-primary-text: var(--color-cyan-100);
+    --theme-button-outlined-text: var(--color-cyan-500);
+    --theme-button-outlined-hover-bg: var(--color-cyan-100);
+    --theme-tile-bg: var(--color-cyan-0);
+    --theme-tile-text: var(--color-cyan-400);
+    --theme-tile-border: var(--color-white);
+    --theme-body-bg: var(--color-cyan-0);
+    --theme-tag-text: var(--color-cyan-300);
+    --theme-title-text: var(--color-cyan-500);
+    --theme-input-text: var(--color-cyan-400);
+    --theme-input-border: var(--color-cyan-500);
+    --theme-input-select-selected: var(--color-cyan-100);
+    --theme-input-text-filled: var(--color-cyan-600);
+    --theme-text: var(--color-cyan-500);
+    --theme-shadow-primary: rgba(255, 255, 255, 0.5);
+    --theme-shadow-button: rgba(255, 255, 255, 0.5);
+    --theme-toggle-bg: var(--color-cyan-100);
+    --theme-toggle-item-bg-selected: var(--color-white);
+    --theme-toggle-item-text-selected: var(--color-cyan-600);
+    --theme-toggle-item-text: var(--color-cyan-700);
+    --theme-border-blue: var(--color-cyan-300);
+}
+
+[data-color="blue"][data-mode="dark"] {
+    --theme-button-primary-bg: var(--color-blue-200);
+    --theme-button-primary-bg-hover: var(--color-blue-300);
+    --theme-button-primary-text: var(--color-blue-800);
+    --theme-button-outlined-text: var(--color-blue-400);
+    --theme-button-outlined-hover-bg: var(--color-slateBlue-600);
+    --theme-tile-bg: var(--color-slateBlue-700);
+    --theme-tile-text: var(--color-blue-200);
+    --theme-tile-border: var(--color-blue-500);
+    --theme-body-bg: var(--color-slateBlue-700);
+    --theme-tag-text: var(--color-blue-600);
+    --theme-title-text: var(--color-blue-500);
+    --theme-input-text: var(--color-blue-400);
+    --theme-input-border: var(--color-blue-400);
+    --theme-input-select-selected: var(--color-slateBlue-300);
+    --theme-input-text-filled: var(--color-blue-500);
+    --theme-text: var(--color-blue-500);
+    --theme-shadow-primary: rgba(171, 210, 250, 0.2);
+    --theme-shadow-button: rgba(138, 180, 223, 0.3);
+    --theme-toggle-bg: var(--color-slateBlue-600);
+    --theme-toggle-item-bg-selected: var(--color-slateBlue-100);
+    --theme-toggle-item-text-selected: var(--color-slateBlue-500);
+    --theme-toggle-item-text: var(--color-slateBlue-100);
+    --theme-border-blue: var(--color-slateBlue-300);
+}
+
+[data-color="cherry"][data-mode="light"] {
+    --theme-button-primary-bg: var(--color-coral-800);
+    --theme-button-primary-bg-hover: var(--color-coral-900);
+    --theme-button-primary-text: var(--color-coral-100);
+    --theme-button-outlined-text: var(--color-coral-700);
+    --theme-button-outlined-hover-bg: var(--color-coral-100);
+    --theme-tile-bg: var(--color-coral-100);
+    --theme-tile-text: var(--color-coral-700);
+    --theme-tile-border: var(--color-white);
+    --theme-body-bg: var(--color-coral-100);
+    --theme-tag-text: var(--color-cherry-700);
+    --theme-title-text: var(--color-coral-700);
+    --theme-input-text: var(--color-coral-700);
+    --theme-input-border: var(--color-coral-700);
+    --theme-input-select-selected: var(--color-coral-300);
+    --theme-input-text-filled: var(--color-coral-900);
+    --theme-text: var(--color-coral-700);
+    --theme-shadow-primary: rgba(255, 248, 247, 0.5);
+    --theme-shadow-button: rgba(255, 255, 255, 0.3);
+    --theme-toggle-bg: var(--color-coral-500);
+    --theme-toggle-item-bg-selected: var(--color-white);
+    --theme-toggle-item-text-selected: var(--color-cherry-600);
+    --theme-toggle-item-text: var(--color-cherry-400);
+    --theme-border-blue: var(--color-coral-600);
+}
+
+[data-color="cherry"][data-mode="dark"] {
+    --theme-button-primary-bg: var(--color-coral-100);
+    --theme-button-primary-bg-hover: var(--color-coral-300);
+    --theme-button-primary-text: var(--color-cherry-600);
+    --theme-button-outlined-text: var(--color-coral-400);
+    --theme-button-outlined-hover-bg: var(--color-cherry-700);
+    --theme-tile-bg: var(--color-cherry-800);
+    --theme-tile-text: var(--color-cherry-100);
+    --theme-tile-border: var(--color-cherry-100);
+    --theme-body-bg: var(--color-cherry-800);
+    --theme-tag-text: var(--color-coral-400);
+    --theme-title-text: var(--color-coral-200);
+    --theme-input-text: var(--color-coral-200);
+    --theme-input-border: var(--color-coral-200);
+    --theme-input-select-selected: var(--color-cherry-700);
+    --theme-input-text-filled: var(--color-coral-500);
+    --theme-text: var(--color-coral-200);
+    --theme-shadow-primary: rgba(226, 153, 146, 0.2);
+    --theme-shadow-button: rgba(238, 155, 146, 0.3);
+    --theme-toggle-bg: var(--color-cherry-700);
+    --theme-toggle-item-bg-selected: var(--color-cherry-0);
+    --theme-toggle-item-text-selected: var(--color-cherry-500);
+    --theme-toggle-item-text: var(--color-coral-100);
+    --theme-border-blue: var(--color-cherry-300);
+}

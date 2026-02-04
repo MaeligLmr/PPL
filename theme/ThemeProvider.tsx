@@ -1,8 +1,11 @@
 // ThemeProvider.tsx
 'use client'
 
-import { ReactNode, createContext, useContext, useMemo, useState } from 'react'
-import { themes } from './themes'
+import { ReactNode, createContext, useContext, useEffect, useState } from 'react'
+import '@/theme/colors.css'
+import '@/theme/tokens.css'
+import '@/theme/spacing.css'
+import '@/theme/typography.css'
 
 type ThemeMode = 'light' | 'dark'
 type ColorMode = 'blue' | 'cherry'
@@ -10,7 +13,6 @@ type ColorMode = 'blue' | 'cherry'
 type ThemeContextType = {
   mode: ThemeMode
   color: ColorMode
-  theme: typeof themes.light.blue
   setMode: (mode: ThemeMode) => void
   setColor: (color: ColorMode) => void
 }
@@ -21,20 +23,15 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [mode, setMode] = useState<ThemeMode>('light')
   const [color, setColor] = useState<ColorMode>('blue')
 
-  const theme = useMemo(() => {
-    return themes[mode][color]
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      document.documentElement.setAttribute('data-color', color)
+      document.documentElement.setAttribute('data-mode', mode)
+    }
   }, [mode, color])
 
   return (
-    <ThemeContext.Provider
-      value={{
-        mode,
-        color,
-        theme,
-        setMode,
-        setColor,
-      }}
-    >
+    <ThemeContext.Provider value={{ mode, color, setMode, setColor }}>
       {children}
     </ThemeContext.Provider>
   )
@@ -42,8 +39,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
 export function useTheme() {
   const ctx = useContext(ThemeContext)
-  if (!ctx) {
-    throw new Error('useTheme must be used inside ThemeProvider')
-  }
+  if (!ctx) throw new Error('useTheme must be used inside ThemeProvider')
   return ctx
 }

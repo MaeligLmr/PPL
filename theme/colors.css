@@ -1,0 +1,89 @@
+:root {
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+
+    /* Cherry */
+    --color-cherry-0: #F7EBED;
+    --color-cherry-100: #F0D8DA;
+    --color-cherry-200: #E0B0B6;
+    --color-cherry-300: #D18991;
+    --color-cherry-400: #C1616D;
+    --color-cherry-500: #B23A48;
+    --color-cherry-600: #8E2E3A;
+    --color-cherry-700: #6B232B;
+    --color-cherry-800: #47171D;
+    --color-cherry-900: #240C0E;
+
+    /* Coral */
+    --color-coral-0: #FFF8F7;
+    --color-coral-100: #FEEAE8;
+    --color-coral-200: #FEE3E0;
+    --color-coral-300: #FDD5D1;
+    --color-coral-400: #FDC7C1;
+    --color-coral-500: #FCB9B2;
+    --color-coral-600: #F09990;
+    --color-coral-700: #E4796E;
+    --color-coral-800: #D9594C;
+    --color-coral-900: #CD392A;
+    --color-coral-1000: #C11908;
+
+    /* Cyan */
+    --color-cyan-0: #E8EAF9;
+    --color-cyan-100: #D1D5F3;
+    --color-cyan-200: #A4ABE6;
+    --color-cyan-300: #7680DA;
+    --color-cyan-400: #4956CD;
+    --color-cyan-500: #1B2CC1;
+    --color-cyan-600: #16239A;
+    --color-cyan-700: #101A74;
+    --color-cyan-800: #0B124D;
+    --color-cyan-900: #080D3A;
+
+    /* Slate Blue */
+    --color-slateBlue-0: #F6F7FB;
+    --color-slateBlue-100: #D1D6E5;
+    --color-slateBlue-200: #ACB5CF;
+    --color-slateBlue-300: #8793B8;
+    --color-slateBlue-400: #6272A2;
+    --color-slateBlue-500: #3D518C;
+    --color-slateBlue-600: #314170;
+    --color-slateBlue-700: #253154;
+    --color-slateBlue-800: #182038;
+    --color-slateBlue-900: #0C101C;
+
+    /* Blue */
+    --color-blue-0: #F7FAFE;
+    --color-blue-100: #EEF6FE;
+    --color-blue-200: #DDEDFD;
+    --color-blue-300: #CDE4FC;
+    --color-blue-400: #BCDBFB;
+    --color-blue-500: #ABD2FA;
+    --color-blue-600: #8AB4DF;
+    --color-blue-700: #6996C3;
+    --color-blue-800: #4977A8;
+    --color-blue-900: #28598C;
+
+    /* Green */
+    --color-green-0: #EDF8ED;
+    --color-green-100: #DBF1DB;
+    --color-green-200: #B7E3B7;
+    --color-green-300: #93D594;
+    --color-green-400: #6FC770;
+    --color-green-500: #4BB94C;
+    --color-green-600: #3C943D;
+    --color-green-700: #2D6F2E;
+    --color-green-800: #1E4A1E;
+    --color-green-900: #173817;
+
+    /* Red */
+    --color-red-0: #F8EBEB;
+    --color-red-100: #F2D7D7;
+    --color-red-200: #E5AFAF;
+    --color-red-300: #D88888;
+    --color-red-400: #CB6060;
+    --color-red-500: #BE3838;
+    --color-red-600: #982D2D;
+    --color-red-700: #722222;
+    --color-red-800: #4C1616;
+    --color-red-900: #391111;
+}
