@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
 import { getUser } from '@/services/auth.service'
 import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
