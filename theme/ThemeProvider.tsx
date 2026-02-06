@@ -20,13 +20,34 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | null>(null)
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [mode, setMode] = useState<ThemeMode>('light')
-  const [color, setColor] = useState<ColorMode>('blue')
+  const [mode, setMode] = useState<ThemeMode>(() => {
+    if (typeof window !== 'undefined') {
+      return (window.localStorage.getItem('theme-mode') as ThemeMode) || 'light'
+    }
+    return 'light'
+  })
+  const [color, setColor] = useState<ColorMode>(() => {
+    if (typeof window !== 'undefined') {
+      return (window.localStorage.getItem('theme-color') as ColorMode) || 'blue'
+    }
+    return 'blue'
+  })
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       document.documentElement.setAttribute('data-color', color)
       document.documentElement.setAttribute('data-mode', mode)
+      window.localStorage.setItem('theme-mode', mode)
+      window.localStorage.setItem('theme-color', color)
+    }
+  }, [mode, color])
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      document.documentElement.setAttribute('data-color', color)
+      document.documentElement.setAttribute('data-mode', mode)
+      window.localStorage.setItem('theme-mode', mode)
+      window.localStorage.setItem('theme-color', color)
     }
   }, [mode, color])
 

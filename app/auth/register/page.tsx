@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAuthStore } from '@/stores/auth.store'
-import '../auth.css'
 import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
 

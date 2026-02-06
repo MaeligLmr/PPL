@@ -1,7 +1,6 @@
 'use client'
 
 import { InputHTMLAttributes, forwardRef, useState } from 'react'
-import './Input.css'
 
 type DatePickerProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
   label?: string

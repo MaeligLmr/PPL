@@ -1,7 +1,6 @@
 'use client'
 
 import { SelectHTMLAttributes, forwardRef, useState } from 'react'
-import './Select.css'
 
 type SelectOption = {
   value: string

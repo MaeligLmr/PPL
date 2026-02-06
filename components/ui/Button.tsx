@@ -1,7 +1,6 @@
 'use client'
 
 import { ButtonHTMLAttributes, ReactNode, forwardRef } from 'react'
-import './Button.css'
 
 type ButtonVariant =
   | 'filled'

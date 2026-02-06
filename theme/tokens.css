@@ -11,9 +11,9 @@
     --radius-17: 17px;
     --radius-full: 1000px;
     /* Typography */
-    --font-heading-large: 700 32px/40px 'Lilita One', sans-serif;
-    --font-heading-medium: 600 24px/32px 'Lilita One', sans-serif;
-    --font-body: 400 16px/24px 'Inter', sans-serif;
+    --font-heading-large: 700 32px/40px var(--font-lilita-one), sans-serif;
+    --font-heading-medium: 600 24px/32px var(--font-lilita-one), sans-serif;
+    --font-body: 400 16px/24px var(--font-inter), sans-serif;
 }
 
 [data-color="blue"][data-mode="light"] {

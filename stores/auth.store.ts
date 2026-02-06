@@ -1,8 +1,9 @@
 import { create } from 'zustand'
 import * as authService from '@/services/auth.service'
+import { User } from '@supabase/supabase-js'
 
 type AuthState = {
-    user: unknown | null
+    user: User | null
     loading: boolean
     login: (email: string, password: string) => Promise<void>
     logout: () => Promise<void>

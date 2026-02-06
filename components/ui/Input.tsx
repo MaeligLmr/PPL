@@ -1,7 +1,6 @@
 'use client'
 
 import { InputHTMLAttributes, forwardRef, useState } from 'react'
-import './Input.css'
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string
