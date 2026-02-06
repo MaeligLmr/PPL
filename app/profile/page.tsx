@@ -1,19 +1,28 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
 import { faCog } from '@fortawesome/free-solid-svg-icons/faCog'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Avatar from '@/components/ui/Avatar'
 import { getBestPerfs, getProfile } from '@/services/profile.service'
 import { BestPerf, Profile } from '@/types/Profile'
 import { BestPerfTile } from '@/components/ui/BestPerfTile'
+import Button from '@/components/ui/Button'
+import { useRouter } from 'next/navigation'
+import { usePageTitle } from '@/components/layout/PageTitleContext'
+
 
 export default function ProfilePage() {
   const [loading, setLoading] = useState(true)
   const [profile, setProfile] = useState<Profile | null>(null)
   const [bestPerfList, setBestPerfList] = useState<BestPerf[]>([]) // TODO: Define a proper type for performance data
 
+  const router = useRouter()
+  const {setTitle} = usePageTitle()
+
+  useEffect(() => {
+    setTitle("Profil")
+  }, [setTitle])
   useEffect(() => {
     getProfile().then((fetchedProfile) => {
       setProfile(fetchedProfile)
@@ -25,6 +34,12 @@ export default function ProfilePage() {
     
   }, [])
 
+  const goToSettings = () => {
+    // Navigate to settings page
+    router.push('/settings')
+  }
+
+
   if (loading) return <div>Chargement...</div>
 
   return (
@@ -32,11 +47,9 @@ export default function ProfilePage() {
       {/* Avatar + Pseudo Section */}
       <section className="profile-header">
         <div className="profile-avatar">
-         <Avatar profile={profile} dimensions={16} />
+         <Avatar profile={profile} dimensions={16} hoverDisabled />
         </div>
-        <Link href="/settings" className="icon-btn settings-icon" title="Paramètres">
-          <FontAwesomeIcon icon={faCog} />
-        </Link>
+        <Button variant="icon-plain" icon={<FontAwesomeIcon icon={faCog} />} onClick={goToSettings} />
       </section>
 
       {/* Meilleures Performances Section */}

@@ -16,7 +16,7 @@ export default function Menu({ title = 'Accueil', profile }: { title?: string, p
 
     return (
         <nav className="ui-menu">
-            <Button variant="icon-plain" icon={<FontAwesomeIcon icon={faHome} />} onClick={() => goHome()}></Button>
+            <Button variant="plain" onClick={() => goHome()} style={{ padding : 0 }}><h1>PPL</h1></Button>
             <h2>{title}</h2>
             <Link href="/profile"><Avatar profile={profile} dimensions={12} showName={false} /></Link>
         </nav>

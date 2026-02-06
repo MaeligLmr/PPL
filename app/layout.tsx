@@ -36,7 +36,9 @@ export default function RootLayout({
         <PageTitleProvider>
           <Providers>
             <ClientMenu />
-            {children}
+            <div className='content'>
+              {children}
+            </div>
           </Providers>
         </PageTitleProvider>
       </body>

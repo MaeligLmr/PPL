@@ -11,7 +11,7 @@ type Props<T> = {
   options: Option<T>[];
 };
 
-export default function Toggle<T extends string>({
+export default function Toggle<T extends string | boolean>({
   value,
   onChange,
   options,
@@ -20,7 +20,7 @@ export default function Toggle<T extends string>({
     <div className="segmented-toggle">
       {options.map((opt) => (
         <button
-          key={opt.value}
+          key={String(opt.value)}
           onClick={() => onChange(opt.value)}
           className={`segmented-btn ${
             value === opt.value ? "active" : ""
