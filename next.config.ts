@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
     ],
   },
   output: "export",
+  basePath: "/PPL",
   distDir: "docs",
   trailingSlash: true,
 };
