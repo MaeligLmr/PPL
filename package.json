@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "echo > docs/.nojekyll",
     "start": "next start",
     "lint": "eslint",
     "export": "next export"
