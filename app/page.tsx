@@ -8,6 +8,8 @@ export default function Home() {
   useEffect(() => {
     setTitle('Dernières séances')
   }, [setTitle])
+  console.log("URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
+
   return (
     <div className="container">
       <h1>Welcome to the Home Page</h1>
