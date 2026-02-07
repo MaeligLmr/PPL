@@ -47,7 +47,7 @@ export function AuthGuard({ children }: Props) {
     return <>{children}</>
   }
 
-  if (loading) return null // ou un loader
+  if (loading) return <div style={{ padding: '2rem', textAlign: 'center' }}>Chargement...</div>
 
   return <>{children}</>
 }
