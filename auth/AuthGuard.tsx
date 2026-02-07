@@ -20,11 +20,20 @@ export function AuthGuard({ children }: Props) {
 
   useEffect(() => {
     const checkSession = async () => {
-      const { data } = await supabase.auth.getSession()
+      try {
+        console.log('Checking session...')
+        const { data, error } = await supabase.auth.getSession()
+        console.log('Session result:', { data, error })
 
-      if (!data.session && !isPublicPath) {
-        router.replace('/auth/login')
-      } else {
+        if (!data.session && !isPublicPath) {
+          console.log('No session, redirecting to login')
+          router.replace('/auth/login')
+        } else {
+          console.log('Session OK or public path, setting loading to false')
+          setLoading(false)
+        }
+      } catch (err) {
+        console.error('Error checking session:', err)
         setLoading(false)
       }
     }
