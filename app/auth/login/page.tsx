@@ -8,32 +8,27 @@ import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
 
 export default function LoginPage() {
+  console.log('LoginPage rendering...')
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const { login, loading } = useAuthStore()
   const [error, setError] = useState<string | null>(null)
-  const [loading, setLoading] = useState(false)
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(null)
-    setLoading(true)
     try {
-      // Exemple simple pour tester
-      console.log('Login attempt:', { email, password })
-      // À remplacer par: await login(email, password)
+      await login(email, password)
       router.replace('/')
     } catch (err) {
       setError((err as Error)?.message || 'Erreur inconnue')
-    } finally {
-      setLoading(false)
     }
   }
 
   return (
     <main className="auth-container">
       <h1 className="auth-title">Connexion</h1>
-      <p style={{ textAlign: 'center', color: 'var(--theme-text)' }}>Test: Page loaded</p>
       <form onSubmit={onSubmit} className="auth-form">
         <Input
           type="email"
