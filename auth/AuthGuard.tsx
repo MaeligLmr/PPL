@@ -16,7 +16,13 @@ export function AuthGuard({ children }: Props) {
 
   // Pages publiques qui ne nécessitent pas d'authentification
   const publicPaths = ['/auth/login', '/auth/register']
-  const isPublicPath = publicPaths.includes(pathname)
+  const normalizedPath = useMemo(() => {
+    const raw = pathname || '/'
+    const withoutBase = raw.startsWith('/PPL') ? raw.replace('/PPL', '') : raw
+    const trimmed = withoutBase.replace(/\/+$/, '')
+    return trimmed === '' ? '/' : trimmed
+  }, [pathname])
+  const isPublicPath = publicPaths.includes(normalizedPath)
 
   useEffect(() => {
     const checkSession = async () => {
@@ -41,7 +47,7 @@ export function AuthGuard({ children }: Props) {
     })
 
     return () => subscription.unsubscribe()
-  }, [router, isPublicPath])
+  }, [router, isPublicPath, supabase])
 
   // Si on est sur une page publique, pas besoin de vérifier l'authentification
   if (isPublicPath) {

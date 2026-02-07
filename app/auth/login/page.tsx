@@ -8,7 +8,6 @@ import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
 
 export default function LoginPage() {
-  console.log('LoginPage rendering...')
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
