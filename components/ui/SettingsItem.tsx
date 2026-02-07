@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { ReactNode } from "react";
+import Button from "./Button";
+import { useRouter } from "next/navigation";
 
 type Props = {
   icon?: ReactNode;
@@ -14,6 +16,13 @@ export default function SettingsItem({
   right,
   href,
 }: Props) {
+  const router = useRouter();
+
+  const goToHref = () => {
+    if (href) {
+      router.push(href)
+    }
+  }
   const content = (
     <div className="settings-item">
       <div className="left">
@@ -25,8 +34,9 @@ export default function SettingsItem({
     </div>
   );
 
+
   if (href) {
-    return <Link href={href}>{content}</Link>;
+    return <Button variant="plain" onClick={() => goToHref()} style={{ padding: 0 }}>{content}</Button>;
   }
 
   return content;
