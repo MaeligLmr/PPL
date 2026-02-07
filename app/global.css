@@ -26,6 +26,24 @@ a {
     text-decoration: none;
 }
 
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.p-4 {
+    padding: var(--spacing-20);
+}
+.px-4 {
+    padding-left: var(--spacing-20);
+    padding-right: var(--spacing-20);
+}
+.py-4 {
+    padding-top: var(--spacing-20);
+    padding-bottom: var(--spacing-20);
+}
+
 .content {
     padding: var(--spacing-20);
 }
@@ -56,7 +74,7 @@ a {
     color: var(--theme-button-primary-text);
 }
 
-.ui-btn--filled:hover:not(:disabled) {
+.ui-btn--filled:hover:not(:disabled), .ui-btn--filled:active:not(:disabled) {
     background: var(--theme-button-primary-bg-hover);
 }
 
@@ -66,7 +84,7 @@ a {
     background: transparent;
 }
 
-.ui-btn--outlined:hover:not(:disabled) {
+.ui-btn--outlined:hover:not(:disabled), .ui-btn--outlined:active:not(:disabled) {
     background: var(--theme-button-outlined-hover-bg);
 }
 
@@ -75,7 +93,7 @@ a {
     background: transparent;
 }
 
-.ui-btn--plain:hover:not(:disabled) {
+.ui-btn--plain:hover:not(:disabled), .ui-btn--plain:active:not(:disabled) {
     background: var(--theme-button-outlined-hover-bg);
 }
 
@@ -145,8 +163,8 @@ select {
     background-color: #e5e7eb;
 }
 
-.avatar-hover-enabled:hover .avatar-circle {
-    outline: 2px solid #4062BB;
+.avatar-hover-enabled:hover,.avatar-hover-enabled:active .avatar-circle {
+    outline: 2px solid var(--theme-title-text);
     outline-offset: 2px;
 }
 
@@ -157,11 +175,11 @@ select {
 }
 
 .avatar-username {
-    color: #4b5563;
+    color: var(--theme-text);
     font-weight: 600;
 }
 
-.avatar-hover-enabled:hover .avatar-username {
+.avatar-hover-enabled:hover, .avatar-hover-enabled:active .avatar-username {
     font-weight: 700;
     text-decoration: underline;
 }

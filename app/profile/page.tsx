@@ -45,7 +45,7 @@ export default function ProfilePage() {
   return (
     <main className="profile-container">
       {/* Avatar + Pseudo Section */}
-      <section className="profile-header">
+      <section className="flex py-4">
         <div className="profile-avatar">
          <Avatar profile={profile} dimensions={16} hoverDisabled />
         </div>
