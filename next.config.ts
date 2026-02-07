@@ -11,11 +11,8 @@ const nextConfig: NextConfig = {
     ],
   },
   output: "export",
-  // Pour GitHub Pages, le chemin de base doit être le nom du repo :
-  basePath: "/PPL/docs",
-  assetPrefix: "/PPL/docs/",
-    trailingSlash: true,
-
+  distDir: "docs",
+  trailingSlash: true,
 };
 
 export default nextConfig;
