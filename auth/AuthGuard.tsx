@@ -20,20 +20,12 @@ export function AuthGuard({ children }: Props) {
 
   useEffect(() => {
     const checkSession = async () => {
-      try {
-        console.log('Checking session...')
-        const { data, error } = await supabase.auth.getSession()
-        console.log('Session result:', { data, error })
+      const { data } = await supabase.auth.getSession()
+      console.log('Session data:', data) // Debug: afficher les données de session
 
-        if (!data.session && !isPublicPath) {
-          console.log('No session, redirecting to login')
-          router.replace('/auth/login')
-        } else {
-          console.log('Session OK or public path, setting loading to false')
-          setLoading(false)
-        }
-      } catch (err) {
-        console.error('Error checking session:', err)
+      if (!data.session && !isPublicPath) {
+        router.replace('/auth/login')
+      } else {
         setLoading(false)
       }
     }
@@ -56,7 +48,7 @@ export function AuthGuard({ children }: Props) {
     return <>{children}</>
   }
 
-  if (loading) return <div style={{ padding: '2rem', textAlign: 'center' }}>Chargement...</div>
+  if (loading) return null // ou un loader
 
   return <>{children}</>
 }
