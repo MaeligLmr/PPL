@@ -3,8 +3,8 @@ const nextConfig = {
   trailingSlash: true,
   images: { unoptimized: true },
   distDir: "docs",
-  basePath: "/ppl",
-  assetPrefix: "/ppl/docs/",
+  basePath: "/PPL",
+  assetPrefix: "/PPL",
 };
 
 export default nextConfig;
