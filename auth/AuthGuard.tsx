@@ -27,8 +27,6 @@ export function AuthGuard({ children }: Props) {
   useEffect(() => {
     const checkSession = async () => {
       const { data } = await supabase.auth.getSession()
-      console.log('Session data:', data) // Debug: afficher les données de session
-
       if (!data.session && !isPublicPath) {
         router.replace('/auth/login')
       } else {

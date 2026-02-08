@@ -14,7 +14,7 @@ export default function SettingsPage() {
     }, [setTitle])
 
     return (
-        <div className="settings-page">
+        <>
 
             <SettingsItem
                 icon={<FontAwesomeIcon icon={faLayerGroup} />}
@@ -51,6 +51,6 @@ export default function SettingsPage() {
                 label="Couleur"
                 right={<ToggleColor />}
             />
-        </div>
+        </>
     );
 }

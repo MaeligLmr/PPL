@@ -26,7 +26,7 @@ export default function SignupPage() {
   }
 
   return (
-    <main className="auth-container">
+    <>
       <h1 className="auth-title">Créer un compte</h1>
       <form onSubmit={onSubmit} className="auth-form">
         <Input
@@ -58,6 +58,6 @@ export default function SignupPage() {
       <p className="auth-link-text">
         Déjà un compte ? <Link href="/auth/login" className="auth-link">Se connecter</Link>
       </p>
-    </main>
+    </>
   )
 }

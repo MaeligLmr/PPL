@@ -3,6 +3,10 @@ export type Workout = {
   date : string
   id_category : string
   id_user : string
+  categorie?: {
+    id: number
+    nom: string
+  } | null
 }
 
 export type WorkoutLine = {
@@ -14,6 +18,7 @@ export type WorkoutLine = {
 export type Serie = {
   id: string
   id_workout_line: string
+  reps : Rep[]
 }
 
 export type Rep = {
@@ -21,4 +26,16 @@ export type Rep = {
   id_serie: string
   charge: number
   qte: number
+}
+
+export type WorkoutWithDetails = Workout & {
+  workout_exercises: WorkoutLineWithDetails[]
+}
+
+export type WorkoutLineWithDetails = WorkoutLine & {
+    exercise: {
+        id: string
+        nom: string
+    },
+  sets: Serie[]
 }

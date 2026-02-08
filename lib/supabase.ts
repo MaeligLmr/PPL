@@ -5,8 +5,7 @@ import { type NextRequest, NextResponse } from "next/server";
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY as string;
 
-console.log("Supabase URL:", supabaseUrl);
-console.log("Supabase Key:", supabaseKey);
+
 export const createBrowserSupabaseClient = () =>
   createBrowserClient(supabaseUrl, supabaseKey)
 

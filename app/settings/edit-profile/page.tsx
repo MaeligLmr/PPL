@@ -56,7 +56,7 @@ export default function EditProfilePage() {
   if (loading) return <div>Chargement...</div>
 
   return (
-    <main className="settings-container">
+    <>
       <Button variant='icon-plain' 
         onClick={() => window.history.back()}
         icon={<FontAwesomeIcon icon={faArrowLeft} />}/>
@@ -87,6 +87,6 @@ export default function EditProfilePage() {
           {error && <p className="error-message">{error}</p>}
         </form>
       </section>
-    </main>
+    </>
   )
 }

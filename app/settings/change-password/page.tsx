@@ -52,7 +52,7 @@ const { setTitle } = usePageTitle()
   }
 
   return (
-    <main className="settings-container">
+    <>
       <Button variant='icon-plain' 
         onClick={() => window.history.back()}
         icon={<FontAwesomeIcon icon={faArrowLeft} />}/>
@@ -95,6 +95,6 @@ const { setTitle } = usePageTitle()
           {error && <p className="error-message">{error}</p>}
         </form>
       </section>
-    </main>
+    </>
   )
 }

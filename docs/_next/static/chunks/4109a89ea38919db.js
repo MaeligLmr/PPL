@@ -1,0 +1,13 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,79390,e=>{"use strict";var t=e.i(17927);async function r(e,r,s){console.log("Fetching workouts for user",e,"from",r,"to",s);let{data:o,error:a}=await t.supabase.from("workout").select("*, categorie: id_category(id,nom,svg)").eq("id_user",e).order("date",{ascending:!1}).range(r,s);if(a)throw a;return o}async function s(e){let{data:r,error:s}=await t.supabase.from("workout").select(`
+      *,
+      categorie: id_category (
+        id,
+        nom
+      ),
+      workout_line (
+        *,
+        serie (*,
+          rep (*)
+        )
+      )
+    `).eq("id",e).single();if(s)throw s;return r}async function o(e,r,s){let{data:o,error:a}=await t.supabase.from("workout").insert([{id_user:e,date:r,id_category:s}]).select().single();if(a)throw a;return o}e.s(["createWorkout",()=>o,"getWorkoutById",()=>s,"getWorkoutsPaginated",()=>r])},31713,e=>{"use strict";var t=e.i(43476),r=e.i(71645),s=e.i(79390),o=e.i(60446),a=e.i(42365),n=e.i(76525),i=e.i(49721),u=e.i(68757),l=e.i(22016);let c=({workout:e})=>(0,t.jsxs)(l.default,{className:"workout tile",href:`/workout/?workout=${e.id}`,children:[(0,t.jsxs)("h3",{className:"text-lg font-semibold mb-2",children:["Séance du ",new Date(e.date).toLocaleDateString()]}),(0,t.jsx)("span",{className:"tag",children:e.categorie?.nom})]});var d=e.i(18566);function f(){let[e,l]=(0,r.useState)([]),[f,g]=(0,r.useState)(0),[h,w]=(0,r.useState)(!1),[m,k]=(0,r.useState)(!0),[b,p]=(0,r.useState)(null),x=(0,d.useRouter)();(0,r.useEffect)(()=>{(0,a.getUser)().then(e=>{p(e?.data?.user?.id??null)})},[]);let{setTitle:j}=(0,o.usePageTitle)();(0,r.useEffect)(()=>{j("Dernières séances")},[j]);let v=(0,r.useRef)(null);return(0,r.useEffect)(()=>{b&&m&&((async()=>{w(!0);let e=10*f,t=await (0,s.getWorkoutsPaginated)(b,e,e+10-1);l(e=>0===f?t:[...e,...t]),k(10===t.length),w(!1)})(),console.log((0,s.getWorkoutById)("23ca9799-a299-4221-b8b5-3f38d81e9374")))},[b,f,m]),(0,r.useEffect)(()=>{if(!m)return;let t=v.current;if(!t)return;let r=new IntersectionObserver(t=>{t[0].isIntersecting&&!h&&e.length>0&&g(e=>e+1)},{rootMargin:"200px",threshold:0});return r.observe(t),()=>r.disconnect()},[v,h,m,e.length]),(0,t.jsxs)("div",{children:[e.map(e=>(0,t.jsx)(c,{workout:e},e.id)),m&&(0,t.jsx)("div",{ref:v,className:"p-4 text-center",children:"Chargement..."}),(0,t.jsx)(n.default,{variant:"icon-filled",size:"lg",className:"fab-button","aria-label":"Ajouter une séance",icon:(0,t.jsx)(i.FontAwesomeIcon,{icon:u.faPlus}),onClick:()=>{x.push("workout/new")}})]})}e.s(["default",()=>f],31713)}]);

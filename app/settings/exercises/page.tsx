@@ -13,16 +13,17 @@ import { usePageTitle } from "@/components/layout/PageTitleContext";
 import Toggle from "@/components/ui/Toggle";
 import SettingsItem from "@/components/ui/SettingsItem";
 import Input from "@/components/ui/Input";
-import Select from "@/components/ui/Select";
+import Select, { SelectOption } from "@/components/ui/Select";
+import { getCategoriesForSelect } from "@/services/category.service";
 
 export default function ExercisesPage() {
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
-
+  const [categories, setCategories] = useState<SelectOption[]>([]);
   async function load() {
     const data = await getExercisesWithPreferences();
-    setExercises(data);
+    setExercises(data as Exercise[]);
   }
 
   const { setTitle } = usePageTitle();
@@ -32,7 +33,7 @@ export default function ExercisesPage() {
   }, [setTitle]);
 
   useEffect(() => {
-    getExercisesWithPreferences().then(setExercises);
+    getExercisesWithPreferences().then(data => setExercises(data as Exercise[]));
   }, []);
 
   async function handleToggle(exo: Exercise) {
@@ -41,11 +42,9 @@ export default function ExercisesPage() {
   }
 
   // Extraire toutes les catégories uniques
-  const categories = Array.from(
-    new Set(
-      exercises.flatMap((exo) => exo.categories?.map((c) => c.nom) ?? [])
-    )
-  );
+  useEffect(() => {
+    getCategoriesForSelect().then(setCategories);
+  }, []);
 
   // Filtrage dynamique
   const filteredExercises = exercises.filter((exo) => {
@@ -57,7 +56,7 @@ export default function ExercisesPage() {
   });
 
   return (
-    <div>
+    <>
       <Button variant="icon-plain" icon={<FontAwesomeIcon icon={faArrowLeft} />} onClick={() => { window.history.back() }}></Button>
       <div className="filters">
         <Input
@@ -68,7 +67,7 @@ export default function ExercisesPage() {
           fullWidth
         />
         <Select
-          options={[{ label: "Toutes catégories", value: "" }, ...categories.map(c => ({ label: c, value: c }))]}
+          options={[{ label: "Toutes catégories", value: "" }, ...categories]}
           value={selectedCategory}
           onChange={e => setSelectedCategory(e.target.value)}
           fullWidth
@@ -90,6 +89,6 @@ export default function ExercisesPage() {
           }
         />
       ))}
-    </div>
+    </>
   );
 }

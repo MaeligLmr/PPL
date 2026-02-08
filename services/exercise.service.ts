@@ -1,7 +1,8 @@
+import { SelectOption } from "@/components/ui/Select";
 import { supabase } from "@/lib/supabase";
 import { Exercise, ExerciseRow } from "@/types/Exercise";
 
-export async function getExercisesWithPreferences(): Promise<Exercise[]> {
+export async function getExercisesWithPreferences(): Promise<(Exercise|SelectOption)[]> {
   const user = (await supabase.auth.getUser()).data.user;
   if (!user) throw new Error("Not authenticated");
 
@@ -31,7 +32,7 @@ export async function getExercisesWithPreferences(): Promise<Exercise[]> {
       svg: exo.svg,
       hidden: !!exo.user_exo_preferences?.[0]?.hidden,
       categories,
-    } as Exercise;
+    } as Exercise | SelectOption;
   });
 }
 

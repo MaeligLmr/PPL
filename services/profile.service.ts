@@ -50,7 +50,7 @@ export async function updatePreferences(prefs: Preferences) {
   const { error } = await supabase
     .from('user_ui_preference')
     .upsert({
-      user_id: userId,
+      id_user: userId,
       ...prefs,
     })
 
@@ -63,7 +63,7 @@ export async function getPreferences(): Promise<Preferences | null> {
   const { data, error } = await supabase
     .from('user_ui_preference')
     .select('*')
-    .eq('user_id', userId)
+    .eq('id_user', userId)
     .single()
 
   if (error && error.code !== 'PGRST116') throw error

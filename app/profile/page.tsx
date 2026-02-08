@@ -43,7 +43,7 @@ export default function ProfilePage() {
   if (loading) return <div>Chargement...</div>
 
   return (
-    <main className="profile-container">
+    <>
       {/* Avatar + Pseudo Section */}
       <section className="flex py-4">
         <div className="profile-avatar">
@@ -63,6 +63,6 @@ export default function ProfilePage() {
         ))}
        </ul>
       </section>
-    </main>
+    </>
   )
 }

@@ -22,7 +22,7 @@ export default function CategoriesPage() {
   }, [setTitle]);
 
   return (
-    <div>
+    <>
     <Button variant="icon-plain" icon={<FontAwesomeIcon icon={faArrowLeft} />} onClick={() => {window.history.back()}}></Button>
       {categories.map((cat) => (
         <SettingsItem
@@ -30,6 +30,6 @@ export default function CategoriesPage() {
           label={cat.nom}
         />
       ))}
-    </div>
+    </>
   );
 }

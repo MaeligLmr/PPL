@@ -22,8 +22,15 @@ h2 {
     font-size: 1.2rem;
 }
 
+h3 {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    margin: 0;
+}
+
 a {
     text-decoration: none;
+    color : inherit
 }
 
 .flex {
@@ -35,10 +42,12 @@ a {
 .p-4 {
     padding: var(--spacing-20);
 }
+
 .px-4 {
     padding-left: var(--spacing-20);
     padding-right: var(--spacing-20);
 }
+
 .py-4 {
     padding-top: var(--spacing-20);
     padding-bottom: var(--spacing-20);
@@ -46,6 +55,18 @@ a {
 
 .content {
     padding: var(--spacing-20);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-20);
+}
+
+.tag {
+    color: var(--theme-tag-text);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    text-transform: uppercase;
 }
 
 /* Button Styles */
@@ -72,9 +93,13 @@ a {
 .ui-btn--filled {
     background: var(--theme-button-primary-bg);
     color: var(--theme-button-primary-text);
+    box-shadow: 0 0 15.3px 4px var(--theme-shadow-button) inset;
+
+
 }
 
-.ui-btn--filled:hover:not(:disabled), .ui-btn--filled:active:not(:disabled) {
+.ui-btn--filled:hover:not(:disabled),
+.ui-btn--filled:active:not(:disabled) {
     background: var(--theme-button-primary-bg-hover);
 }
 
@@ -84,7 +109,8 @@ a {
     background: transparent;
 }
 
-.ui-btn--outlined:hover:not(:disabled), .ui-btn--outlined:active:not(:disabled) {
+.ui-btn--outlined:hover:not(:disabled),
+.ui-btn--outlined:active:not(:disabled) {
     background: var(--theme-button-outlined-hover-bg);
 }
 
@@ -93,7 +119,8 @@ a {
     background: transparent;
 }
 
-.ui-btn--plain:hover:not(:disabled), .ui-btn--plain:active:not(:disabled) {
+.ui-btn--plain:hover:not(:disabled),
+.ui-btn--plain:active:not(:disabled) {
     background: var(--theme-button-outlined-hover-bg);
 }
 
@@ -102,6 +129,30 @@ a {
     width: 44px;
     height: 44px;
     border-radius: var(--radius-full);
+}
+
+.ui-btn--sm {
+    font-size: 0.85rem;
+}
+
+.ui-btn--md {
+    font-size: 1rem;
+}
+
+.ui-btn--lg {
+    font-size: 1.2rem;
+}
+
+.ui-btn--icon.ui-btn--lg {
+    width: 64px;
+    height: 64px;
+}
+
+.fab-button {
+    position: fixed;
+    right: var(--spacing-20);
+    bottom: var(--spacing-20);
+    z-index: 1000;
 }
 
 .ui-btn--full {
@@ -163,7 +214,8 @@ select {
     background-color: #e5e7eb;
 }
 
-.avatar-hover-enabled:hover,.avatar-hover-enabled:active .avatar-circle {
+.avatar-hover-enabled:hover,
+.avatar-hover-enabled:active .avatar-circle {
     outline: 2px solid var(--theme-title-text);
     outline-offset: 2px;
 }
@@ -179,7 +231,8 @@ select {
     font-weight: 600;
 }
 
-.avatar-hover-enabled:hover, .avatar-hover-enabled:active .avatar-username {
+.avatar-hover-enabled:hover,
+.avatar-hover-enabled:active .avatar-username {
     font-weight: 700;
     text-decoration: underline;
 }
@@ -241,7 +294,7 @@ select.ui-input {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    width : 100%;
+    width: 100%;
 }
 
 select.ui-input:focus {
@@ -294,8 +347,7 @@ select.ui-input:disabled {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--spacing-10) var(--spacing-20);
-    background: var(--theme-tile-bg);
+    padding: var(--spacing-20);
     width: 100vw;
 }
 
@@ -309,6 +361,13 @@ select.ui-input:disabled {
     border: 1px solid var(--theme-tile-border);
     background: var(--theme-tile-bg);
     box-shadow: -8px -18px 25.8px 0 var(--theme-shadow-primary) inset;
+}
+
+.tile.workout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-10);
+    align-items: flex-start;
 }
 
 .tile-header {
@@ -345,7 +404,7 @@ select.ui-input:disabled {
     align-items: center;
     padding: var(--spacing-15) 0;
     border-bottom: 1px solid var(--border);
-color: var(--theme-text);
+    color: var(--theme-text);
 }
 
 .settings-item .left {
@@ -383,4 +442,46 @@ color: var(--theme-text);
     gap: 8px;
     margin-bottom: 16px;
     flex-wrap: wrap;
+}
+
+.exercise-card {
+  border-left: 3px solid #4a6cff;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.exercise-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.set-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+input {
+  border: 1px solid #4a6cff;
+  border-radius: 8px;
+  padding: 8px;
+  width: 80px;
+}
+
+.add-set {
+  margin-top: 12px;
+  border: 1px solid #4a6cff;
+  background: transparent;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.add-exercise {
+  width: 100%;
+  margin-top: 24px;
+  padding: 12px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #3c4bff, #5a6bff);
+  color: white;
 }

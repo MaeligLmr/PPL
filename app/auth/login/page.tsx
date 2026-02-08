@@ -26,7 +26,7 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="auth-container">
+    <>
       <h1 className="auth-title">Connexion</h1>
       <form onSubmit={onSubmit} className="auth-form">
         <Input
@@ -57,6 +57,6 @@ export default function LoginPage() {
       <p className="auth-link-text">
         Pas de compte ? <Link href="/auth/register" className="auth-link">Créer un compte</Link>
       </p>
-    </main>
+    </>
   )
 }

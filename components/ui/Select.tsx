@@ -4,7 +4,7 @@ import { SelectHTMLAttributes, forwardRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown'
 
-type SelectOption = {
+export type SelectOption = {
   value: string
   label: string
 }
@@ -15,10 +15,11 @@ type SelectProps = Omit<SelectHTMLAttributes<HTMLSelectElement>, 'children'> & {
   fullWidth?: boolean
   options: SelectOption[]
   placeholder?: string
+  defaultValue?: string
 }
 
 const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ label, error, fullWidth = false, options, placeholder, style, value, ...props }, ref) => {
+  ({ label, error, fullWidth = false, options, placeholder, style, value, defaultValue, ...props }, ref) => {
     const [isFocused, setIsFocused] = useState(false)
     const hasValue = value !== undefined && value !== ''
 
@@ -29,6 +30,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
           <select
             ref={ref}
             value={value}
+            defaultValue={defaultValue}
             className={["ui-input", error ? "ui-input--error" : "", isFocused ? "ui-input--focus" : "", hasValue ? "ui-input--filled" : ""].join(" ")}
             style={{ ...style, appearance: 'none', WebkitAppearance: 'none', MozAppearance: 'none', paddingRight: 36 }}
             onFocus={(e) => {
