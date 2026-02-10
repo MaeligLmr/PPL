@@ -61,7 +61,7 @@ export default function EditProfilePage() {
         onClick={() => window.history.back()}
         icon={<FontAwesomeIcon icon={faArrowLeft} />}/>
 
-      <section className="settings-form">
+      
         <form onSubmit={handleSubmit}>
           <Input
             type="text"
@@ -86,7 +86,6 @@ export default function EditProfilePage() {
           {success && <p className="success-message">✓ Modifications enregistrées</p>}
           {error && <p className="error-message">{error}</p>}
         </form>
-      </section>
     </>
   )
 }

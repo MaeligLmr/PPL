@@ -1,48 +1,63 @@
 import { WorkoutLineWithDetails } from "@/types/Workout";
 import { SetRow } from "./SetRow";
 import { useEffect, useState } from "react";
-import Input from "../ui/Input";
 import Select, { SelectOption } from "../ui/Select";
-import { Exercise } from "@/types/Exercise";
-import { getExercisesWithPreferences } from "@/services/exercise.service";
+import { getExercisesForSelect } from "@/services/exercise.service";
 import Button from "../ui/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faPen } from "@fortawesome/free-solid-svg-icons";
+import { updateWorkoutLine } from "@/services/workout.service";
 
-export function ExerciseCard({ exercise }: { exercise: WorkoutLineWithDetails }) {
-    const [isEditing, setIsEditing] = useState(false);
-    const [exercises, setExercises] = useState<SelectOption[]>([]);
-    useEffect(() => {
-        getExercisesWithPreferences().then((data) => {
-            setExercises(data as SelectOption[]);
-        });
-    }, [])
-    const editExercise = (exoId: string) => {
-        //TODO : edit exercice of workout
-    }
+export function ExerciseCard({ exercise, id_category, isNew, onExerciseUpdate }: { exercise: WorkoutLineWithDetails, id_category: string, isNew: boolean, onExerciseUpdate?: () => void }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [exercises, setExercises] = useState<SelectOption[]>([]);
+  const [selectedExercise, setSelectedExercise] = useState<string | null>(null);
+  useEffect(() => {
+    getExercisesForSelect(id_category).then((data) => {
+      setExercises(data as SelectOption[]);
+      setIsEditing(isNew);
+    });
+  }, [isNew, id_category])
+  const editExercise = () => {
+    updateWorkoutLine(exercise.id, selectedExercise!).then(() => {
+      setIsEditing(false);
+      onExerciseUpdate?.(); // Notifier le parent de la mise à jour
+    });
+  }
+  const addSet = (workoutLineId: string) => {
+    // Logic to add a new set to the workout line
+  }
 
   return (
     <div className="exercise-card">
       <div className="exercise-header">
-        if (isEditing) {
-          <Select options={exercises} defaultValue={exercise.exercise.id} onChange={e => editExercise(e.target.value)}></Select>
-        } else {
-          <span>{exercise.exercise.nom}</span>
-        }
-        <Button variant="icon-plain"
-            icon={<FontAwesomeIcon icon={faPen} />}
-         onClick={() => setIsEditing(!isEditing)}>
-          
-        </Button>
+        {isEditing ? (
+          <>
+            <Select options={exercises} defaultValue={exercise.exercise ? exercise.exercise.id : ""} onChange={e => setSelectedExercise(e.target.value)} />
+            <Button variant="icon-plain"
+              icon={<FontAwesomeIcon icon={faCheck} />}
+              onClick={() => editExercise()}>
+            </Button>
+          </>
+        ) : (
+          <>
+            <span>{exercise.exercise?.nom}</span>
+
+            <Button variant="icon-plain"
+              icon={<FontAwesomeIcon icon={faPen} />}
+              onClick={() => setIsEditing(!isEditing)}>
+
+            </Button> </>
+        )}
       </div>
-
-      {exercise.sets.map((set, i) => (
-        <SetRow key={set.id} set={set} index={i} />
-      ))}
-
-      <button className="add-set">
+      {exercise.sets && (
+        exercise.sets.map((set, i) => (
+          <SetRow key={set.id} set={set} index={i} />
+        ))
+      )}
+      <Button variant="outlined" onClick={() => addSet(exercise.id)}>
         + Nouvelle série
-      </button>
+      </Button>
     </div>
   );
 }

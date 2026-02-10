@@ -33,6 +33,12 @@ a {
     color : inherit
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-15);
+}
+
 .flex {
     display: flex;
     justify-content: space-between;
@@ -98,8 +104,7 @@ a {
 
 }
 
-.ui-btn--filled:hover:not(:disabled),
-.ui-btn--filled:active:not(:disabled) {
+.ui-btn--filled:hover:not(:disabled) {
     background: var(--theme-button-primary-bg-hover);
 }
 
@@ -109,8 +114,7 @@ a {
     background: transparent;
 }
 
-.ui-btn--outlined:hover:not(:disabled),
-.ui-btn--outlined:active:not(:disabled) {
+.ui-btn--outlined:hover:not(:disabled) {
     background: var(--theme-button-outlined-hover-bg);
 }
 
@@ -119,8 +123,7 @@ a {
     background: transparent;
 }
 
-.ui-btn--plain:hover:not(:disabled),
-.ui-btn--plain:active:not(:disabled) {
+.ui-btn--plain:hover:not(:disabled) {
     background: var(--theme-button-outlined-hover-bg);
 }
 
@@ -214,8 +217,7 @@ select {
     background-color: #e5e7eb;
 }
 
-.avatar-hover-enabled:hover,
-.avatar-hover-enabled:active .avatar-circle {
+.avatar-hover-enabled:hover .avatar-circle {
     outline: 2px solid var(--theme-title-text);
     outline-offset: 2px;
 }
@@ -231,8 +233,7 @@ select {
     font-weight: 600;
 }
 
-.avatar-hover-enabled:hover,
-.avatar-hover-enabled:active .avatar-username {
+.avatar-hover-enabled:hover .avatar-username {
     font-weight: 700;
     text-decoration: underline;
 }
@@ -261,6 +262,7 @@ select {
     background: transparent;
     color: var(--theme-input-text);
     outline: none;
+    width : 100%;
 }
 
 .ui-input::-webkit-input-placeholder {

@@ -43,6 +43,10 @@ export async function getWorkoutById(workoutId: string) {
       ),
       workout_line (
         *,
+        exercise: id_exo (
+          id,
+          nom
+        ),
         serie (*,
           rep (*)
         )
@@ -75,17 +79,34 @@ export async function createWorkout(userId: string, date: string, id_category: s
 }
 
 export async function addExerciseToWorkout(
-  workoutId: string,
+  id:string
+) {
+  const { data, error } = await supabase
+    .from("workout_line")
+    .insert([
+      {
+        id_workout: id,
+        id_exo: null,
+      },
+    ])
+    .select()
+    .single();
+
+  if (error) throw error;
+
+  return data;
+}
+
+export async function updateWorkoutLine(
+  workoutLineId: string,
   exerciseId: string
 ) {
   const { data, error } = await supabase
-    .from("workout_ligne")
-    .insert([
-      {
-        workout_id: workoutId,
-        exercise_id: exerciseId,
-      },
-    ])
+    .from("workout_line")
+    .update({
+      id_exo: exerciseId,
+    })
+    .eq("id", workoutLineId)
     .select()
     .single();
 

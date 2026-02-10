@@ -54,7 +54,6 @@ export default function Home() {
     };
 
     load();
-    console.log(getWorkoutById("23ca9799-a299-4221-b8b5-3f38d81e9374"))
   }, [userId, page, hasMore]);
   useEffect(() => {
     if (!hasMore) return;

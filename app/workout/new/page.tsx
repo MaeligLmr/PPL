@@ -29,7 +29,7 @@ export default function NewWorkoutPage() {
             }
         })
         setTitle("Nouvelle séance")
-    }, [])
+    }, [setTitle])
 
     const handleCreateWorkout = async () => {
         if (!userId || !selectedCategory || !selectedDate) return

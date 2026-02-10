@@ -1,8 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
-import { getWorkoutById } from '@/services/workout.service'
+import { addExerciseToWorkout, getWorkoutById } from '@/services/workout.service'
 import { WorkoutLineWithDetails, WorkoutWithDetails } from '@/types/Workout'
 import { usePageTitle } from '@/components/layout/PageTitleContext'
 import Button from '@/components/ui/Button'
@@ -20,27 +20,31 @@ export default function WorkoutPage() {
 
   const id = searchParams.get('workout')
 
-  useEffect(() => {
+  const loadWorkout = useCallback(async () => {
     if (!id) return
-
-    const load = async () => {
-      try {
-        setLoading(true)
-        const data = await getWorkoutById(id)
-        setWorkout(data)
-        setTitle(`Séance du ${new Date(data.date).toLocaleDateString('fr-FR')}`)
-      } catch (err) {
-        setError((err as Error)?.message || 'Erreur lors du chargement')
-      } finally {
-        setLoading(false)
-      }
+    try {
+      setLoading(true)
+      const data = await getWorkoutById(id)
+      setWorkout(data)
+      setTitle(`Séance du ${new Date(data.date).toLocaleDateString('fr-FR')}`)
+    } catch (err) {
+      setError((err as Error)?.message || 'Erreur lors du chargement')
+    } finally {
+      setLoading(false)
     }
-
-    load()
   }, [id, setTitle])
 
+  useEffect(() => {
+    loadWorkout()
+  }, [id, setTitle, loadWorkout])
+
   const addExercice = () => {
-    //TODO : add exercice to workout
+    addExerciseToWorkout(id!).then(() => {
+      // Recharger les données après ajout d'exercice
+      loadWorkout()
+    }).catch((err) => {
+      console.error('Erreur ajout exercice:', err)
+    })
   }
 
   if (loading) {
@@ -69,14 +73,18 @@ export default function WorkoutPage() {
           gap: '1rem',
         }}
       >
-        {workout.workout_exercises && workout.workout_exercises.length > 0 ? (
-          workout.workout_exercises.map((line) => (
-            <ExerciseCard key={line.id} exercise={line as WorkoutLineWithDetails} />
+        {workout.workout_line && workout.workout_line.length > 0 && (
+          workout.workout_line.map((line) => (
+            <ExerciseCard
+              key={line.id}
+              id_category= {workout.id_category}
+              exercise={line as WorkoutLineWithDetails}
+              isNew={line.id_exo === null}
+              onExerciseUpdate={loadWorkout}
+            />
           ))
-        ) : (
-          <p>Aucun exercice enregistré</p>
         )}
-        <Button variant="filled" leftIcon={<FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>} onClick={addExercice} />
+        <Button variant="filled" leftIcon={<FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>} onClick={addExercice} >Ajouter un exercice</Button>
       </div >
     </>
   )
