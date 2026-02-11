@@ -19,6 +19,7 @@ export type Serie = {
   id: string
   id_workout_line: string
   reps: Rep[]
+  ordre: number
 }
 
 export type Rep = {
@@ -37,5 +38,5 @@ export type WorkoutLineWithDetails = WorkoutLine & {
     id: string
     nom: string
   },
-  sets: Serie[]
+  serie: Serie[]
 }

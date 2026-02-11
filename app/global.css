@@ -30,7 +30,7 @@ h3 {
 
 a {
     text-decoration: none;
-    color : inherit
+    color: inherit
 }
 
 form {
@@ -249,8 +249,11 @@ select {
 }
 
 .ui-input-label {
-    font: var(--font-body);
-    font-weight: 600;
+    font-family: Inter;
+    font-size: 0.7em;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
     color: var(--theme-input-text);
 }
 
@@ -262,7 +265,7 @@ select {
     background: transparent;
     color: var(--theme-input-text);
     outline: none;
-    width : 100%;
+    width: 100%;
 }
 
 .ui-input::-webkit-input-placeholder {
@@ -447,43 +450,88 @@ select.ui-input:disabled {
 }
 
 .exercise-card {
-  border-left: 3px solid #4a6cff;
-  padding: 16px;
-  margin-bottom: 16px;
+    margin-bottom: 16px;
 }
 
 .exercise-header {
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-10);
+    padding: var(--spacing-15) 0;
+    background: var(--theme-tile-bg);
+    border-radius: var(--radius-15);
+    user-select: none;
+}
+
+.exercise-header:hover {
+    background: var(--theme-button-outlined-hover-bg);
+}
+
+.exercise-details {
+    border-left: 2px solid var(--theme-button-outlined-text);
+    background: var(--theme-tile-bg);
+    padding: 0 0 0 var(--spacing-20);
+    margin-left: var(--spacing-20);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-10);
 }
 
 .set-row {
-  display: flex;
-  gap: 12px;
-  margin-top: 12px;
+    margin-bottom: var(--spacing-15);
+}
+
+.set-header {
+    transition: background-color 0.2s ease;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-10);
+    cursor: pointer;
+    padding: var(--spacing-10);
+    background: var(--theme-tile-bg);
+    border-radius: var(--radius-10);
+    margin-bottom: 0;
+}
+
+.set-header:hover {
+    background: var(--theme-button-outlined-hover-bg) !important;
+}
+
+.reps-container {
+    background: var(--theme-body-bg);
+    margin-left: var(--spacing-15);
+    border-left: 2px solid var(--theme-input-border);
+    padding-left: var(--spacing-15);
+}
+
+.rep-row {
+    display: flex;
+    gap: var(--spacing-10);
+    align-items: flex-end;
+    margin-bottom: var(--spacing-10);
 }
 
 input {
-  border: 1px solid #4a6cff;
-  border-radius: 8px;
-  padding: 8px;
-  width: 80px;
+    border: 1px solid #4a6cff;
+    border-radius: 8px;
+    padding: 8px;
+    width: 80px;
 }
 
 .add-set {
-  margin-top: 12px;
-  border: 1px solid #4a6cff;
-  background: transparent;
-  padding: 8px;
-  border-radius: 10px;
+    margin-top: 12px;
+    border: 1px solid #4a6cff;
+    background: transparent;
+    padding: 8px;
+    border-radius: 10px;
 }
 
 .add-exercise {
-  width: 100%;
-  margin-top: 24px;
-  padding: 12px;
-  border-radius: 12px;
-  background: linear-gradient(90deg, #3c4bff, #5a6bff);
-  color: white;
+    width: 100%;
+    margin-top: 24px;
+    padding: 12px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #3c4bff, #5a6bff);
+    color: white;
 }

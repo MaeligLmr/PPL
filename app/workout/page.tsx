@@ -7,7 +7,7 @@ import { WorkoutLineWithDetails, WorkoutWithDetails } from '@/types/Workout'
 import { usePageTitle } from '@/components/layout/PageTitleContext'
 import Button from '@/components/ui/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { ExerciseCard } from '@/components/workout/ExerciceCard'
 
 export default function WorkoutPage() {
@@ -31,6 +31,7 @@ export default function WorkoutPage() {
       setError((err as Error)?.message || 'Erreur lors du chargement')
     } finally {
       setLoading(false)
+      console.log(workout)
     }
   }, [id, setTitle])
 

@@ -1,7 +1,5 @@
 import Button from '../ui/Button'
 import Avatar from '../ui/Avatar'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome } from '@fortawesome/free-solid-svg-icons/faHome'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Profile } from '@/types/Profile'

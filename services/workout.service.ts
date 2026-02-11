@@ -18,7 +18,7 @@ export async function getWorkoutsPaginated(
   from: number,
   to: number
 ) {
-    console.log("Fetching workouts for user", userId, "from", from, "to", to);
+  console.log("Fetching workouts for user", userId, "from", from, "to", to);
   const { data, error } = await supabase
     .from("workout")
     .select("*, categorie: id_category(id,nom,svg)")
@@ -48,7 +48,7 @@ export async function getWorkoutById(workoutId: string) {
           nom
         ),
         serie (*,
-          rep (*)
+          reps (*)
         )
       )
     `)
@@ -79,7 +79,7 @@ export async function createWorkout(userId: string, date: string, id_category: s
 }
 
 export async function addExerciseToWorkout(
-  id:string
+  id: string
 ) {
   const { data, error } = await supabase
     .from("workout_line")
@@ -117,12 +117,52 @@ export async function updateWorkoutLine(
 
 export async function addSet(
   workoutExerciseId: string,
+  ordre: number
 ) {
-  const { data, error } = await supabase
-    .from("sets")
+  // Créer la série
+  const { data: setData, error: setError } = await supabase
+    .from("serie")
     .insert([
       {
-        exercise_id: workoutExerciseId,
+        id_workout_line: workoutExerciseId,
+        ordre: ordre,
+      },
+    ])
+    .select()
+    .single();
+
+  if (setError) throw setError;
+
+  // Ajouter automatiquement une première rep avec charge et qte à 0
+  const { data: repData, error: repError } = await supabase
+    .from("rep")
+    .insert([
+      {
+        id_serie: setData.id,
+        charge: 0,
+        qte: 0,
+      },
+    ])
+    .select()
+    .single();
+
+  if (repError) throw repError;
+
+  return setData;
+}
+
+export async function addRep(
+  setId: string,
+  charge: number,
+  qte: number
+) {
+  const { data, error } = await supabase
+    .from("reps")
+    .insert([
+      {
+        id_serie: setId,
+        charge,
+        qte,
       },
     ])
     .select()
@@ -133,25 +173,34 @@ export async function addSet(
   return data;
 }
 
-export async function addRep(
-  setId: string,
+export async function editRep(
+  repId: string,
   charge: number,
-    qte: number
+  qte: number
 ) {
   const { data, error } = await supabase
     .from("reps")
-    .insert([
-      {
-        set_id: setId,
-        charge,
-        qte,
-      },
-    ])
+    .update({
+      charge,
+      qte,
+    })
+    .eq("id", repId)
     .select()
-    .single(); 
-
-    return data;
+    .single();
 
   if (error) throw error;
-}
 
+  return data;
+}
+export async function deleteRep(repId: string) {
+  const { data, error } = await supabase
+    .from("reps")
+    .delete()
+    .eq("id", repId)
+    .select()
+    .single();
+
+  if (error) throw error;
+
+  return data;
+}
