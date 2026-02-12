@@ -12,7 +12,7 @@ export async function getExercisesWithPreferences(id_category: string | null = n
       id,
       nom,
       svg,
-      exo_categorie(
+      exo_categorie!inner(
         categorie(
           id,
           nom
@@ -20,16 +20,21 @@ export async function getExercisesWithPreferences(id_category: string | null = n
       ),
       user_exo_preferences(hidden)
     `)
-   
-  if(id_category) {
-    query.eq('exo_categorie.id_categorie', id_category)
-  }
 
   const { data, error } = await query;
-
+  console.log("Fetched exercises:", data)
+  
   if (error) throw error;
 
-  return (data ?? []).map((exo: ExerciseRow) => {
+  const filteredData = data?.filter((exo) => {
+    if (!id_category) return true;
+    const categories = exo.exo_categorie?.flatMap((ec) => ec.categorie) ?? [];
+    return categories.some((c) => c?.id === id_category);
+  }) ?? [];
+  
+  console.log("Filtered exercises:", filteredData)
+
+  return filteredData.map((exo: ExerciseRow) => {
     const categories = exo.exo_categorie?.flatMap((ec) => ec.categorie) ?? [];
     return {
       id: exo.id,

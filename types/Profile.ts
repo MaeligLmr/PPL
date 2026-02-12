@@ -23,3 +23,4 @@ export type BestPerf = {
   workout_date: string
 }
 
+export type PistePoids = {date: string, poids: number }

@@ -16,10 +16,11 @@ h2 {
     font-family: "Lilita One", sans-serif;
     text-transform: uppercase;
     margin: 0;
+    text-align: center;
 }
 
 h2 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 h3 {
@@ -37,6 +38,14 @@ form {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-15);
+}
+
+li {
+    list-style: none;
+}
+
+ul {
+    padding-left: 0;
 }
 
 .flex {
@@ -211,6 +220,7 @@ select {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .avatar-default {
@@ -246,6 +256,67 @@ select {
 
 .ui-input-container--full {
     width: 100%;
+}
+
+.ui-input-file-avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-10);
+    margin-bottom: var(--spacing-20);
+}
+
+.ui-input-file-avatar-container--full {
+    width: 100%;
+}
+
+.ui-input-file-avatar {
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.ui-input-file-avatar:hover {
+    transform: scale(1.05);
+}
+
+.ui-input-file-avatar-image {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.ui-input-file-avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ui-input-file-avatar-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.ui-input-file-avatar:hover .ui-input-file-avatar-overlay {
+    opacity: 1;
+}
+
+.ui-input-file-hidden {
+    display: none;
 }
 
 .ui-input-label {
@@ -359,7 +430,7 @@ select.ui-input:disabled {
 
 .tile {
     display: flex;
-    padding: var(--spacing-20);
+    padding: var(--spacing-10) var(--spacing-20);
     justify-content: space-between;
     align-items: center;
     border-radius: var(--radius-15);
@@ -372,6 +443,7 @@ select.ui-input:disabled {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-10);
+    padding: var(--spacing-20);
     align-items: flex-start;
 }
 
@@ -474,11 +546,11 @@ select.ui-input:disabled {
     margin-left: var(--spacing-20);
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-10);
 }
 
 .set-row {
     margin-bottom: var(--spacing-15);
+    
 }
 
 .set-header {
@@ -492,6 +564,15 @@ select.ui-input:disabled {
     background: var(--theme-tile-bg);
     border-radius: var(--radius-10);
     margin-bottom: 0;
+    padding-right : 0;
+}
+
+.set-title { 
+    display: flex; 
+    align-items: center;
+    gap: var(--spacing-10);
+    width : 100%;
+
 }
 
 .set-header:hover {
@@ -510,6 +591,7 @@ select.ui-input:disabled {
     gap: var(--spacing-10);
     align-items: flex-end;
     margin-bottom: var(--spacing-10);
+    width : 100%;
 }
 
 input {
@@ -534,4 +616,52 @@ input {
     border-radius: 12px;
     background: linear-gradient(90deg, #3c4bff, #5a6bff);
     color: white;
+}
+/* My Infos Page */
+.my-infos-container {
+    padding: 1rem;
+}
+
+.my-infos-stats {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.my-infos-stat-card {
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--theme-card-background);
+    border-radius: var(--radius-15);
+    min-width: 150px;
+}
+
+.my-infos-stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--theme-title-text);
+}
+
+.my-infos-stat-label {
+    font-size: 0.9rem;
+    color: var(--theme-text);
+    margin-top: 0.5rem;
+}
+
+.my-infos-graph-container {
+    background: var(--theme-card-background);
+    border-radius: var(--radius-15);
+}
+
+.my-infos-graph-title {
+    margin-bottom: 1rem;
+    color: var(--theme-title-text);
+}
+
+.my-infos-empty {
+    text-align: center;
+    padding: 2rem;
+    color: var(--theme-text);
+    background: var(--theme-card-background);
+    border-radius: var(--radius-15);
 }

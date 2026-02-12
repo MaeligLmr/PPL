@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { getWorkoutById, getWorkoutsPaginated } from "@/services/workout.service";
+import { getWorkoutsPaginated } from "@/services/workout.service";
 import { usePageTitle } from "@/components/layout/PageTitleContext";
 import { getUser } from "@/services/auth.service";
 import Button from "@/components/ui/Button";

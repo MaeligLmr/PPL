@@ -6,46 +6,42 @@ import Input from '@/components/ui/Input'
 import { usePageTitle } from '@/components/layout/PageTitleContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft'
+import { changePassword } from '@/services/profile.service'
+import { toast } from 'sonner'
 
 export default function ChangePasswordPage() {
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-const { setTitle } = usePageTitle()
-      useEffect(() => {
-        setTitle('Modifier le mot de passe')
-      }, [setTitle])
+  const { setTitle } = usePageTitle()
+  useEffect(() => {
+    setTitle('Modifier le mot de passe')
+  }, [setTitle])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError(null)
-    setSuccess(false)
     
     if (newPassword !== confirmPassword) {
-      setError('Les mots de passe ne correspondent pas')
+      toast.error('Les mots de passe ne correspondent pas')
       return
     }
 
     if (newPassword.length < 6) {
-      setError('Le mot de passe doit contenir au moins 6 caractères')
+      toast.error('Le mot de passe doit contenir au moins 6 caractères')
       return
     }
 
     setLoading(true)
 
     try {
-      // TODO: Implement API call to change password
-      // await changePassword(currentPassword, newPassword)
-      setSuccess(true)
+      await changePassword(currentPassword, newPassword);
       setCurrentPassword('')
       setNewPassword('')
       setConfirmPassword('')
-      setTimeout(() => setSuccess(false), 3000)
+      toast.success('Mot de passe changé avec succès')
     } catch (err) {
-      setError((err as Error)?.message || 'Erreur lors du changement de mot de passe')
+      toast.error((err as Error)?.message || 'Erreur lors du changement de mot de passe')
     } finally {
       setLoading(false)
     }
@@ -91,8 +87,6 @@ const { setTitle } = usePageTitle()
           <Button type="submit" disabled={loading} fullWidth>
             {loading ? 'Changement en cours...' : 'Changer le mot de passe'}
           </Button>
-          {success && <p className="success-message">✓ Mot de passe changé avec succès</p>}
-          {error && <p className="error-message">{error}</p>}
         </form>
       </section>
     </>

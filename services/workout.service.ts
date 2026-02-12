@@ -33,6 +33,7 @@ export async function getWorkoutsPaginated(
 
 
 export async function getWorkoutById(workoutId: string) {
+    console.log("Fetching workout with id", workoutId)
   const { data, error } = await supabase
     .from("workout")
     .select(`
@@ -48,7 +49,7 @@ export async function getWorkoutById(workoutId: string) {
           nom
         ),
         serie (*,
-          reps (*)
+          reps(*)
         )
       )
     `)
@@ -135,7 +136,7 @@ export async function addSet(
 
   // Ajouter automatiquement une première rep avec charge et qte à 0
   const { data: repData, error: repError } = await supabase
-    .from("rep")
+    .from("reps")
     .insert([
       {
         id_serie: setData.id,
@@ -203,4 +204,41 @@ export async function deleteRep(repId: string) {
   if (error) throw error;
 
   return data;
+}
+
+export async function deleteWorkout(workoutId: string) {
+  const { data, error } = await supabase
+    .from("workout")
+    .delete()
+    .eq("id", workoutId)
+    .select()
+    .single();
+
+    if (error) throw error;
+
+    return data;
+}
+
+export async function deleteExercise(workoutLineId: string) {
+  const { data, error } = await supabase
+    .from("workout_line")
+    .delete()
+    .eq("id", workoutLineId)
+    .select()
+    .single();
+
+    if (error) throw error;
+    return data;
+}
+
+export async function deleteSerie(serieId: string) {
+  const { data, error } = await supabase
+    .from("serie")
+    .delete()
+    .eq("id", serieId)
+    .select()
+    .single();
+
+    if (error) throw error;
+    return data;
 }

@@ -8,7 +8,6 @@ import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
 
 export default function LoginPage() {
-  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { login, loading } = useAuthStore()
@@ -19,14 +18,14 @@ export default function LoginPage() {
     setError(null)
     try {
       await login(email, password)
-      router.replace('/')
+      window.location.href = '/'
     } catch (err) {
       setError((err as Error)?.message || 'Erreur inconnue')
     }
   }
 
   return (
-    <>
+    <div className="content">
       <h1 className="auth-title">Connexion</h1>
       <form onSubmit={onSubmit} className="auth-form">
         <Input
@@ -57,6 +56,6 @@ export default function LoginPage() {
       <p className="auth-link-text">
         Pas de compte ? <Link href="/auth/register" className="auth-link">Créer un compte</Link>
       </p>
-    </>
+    </div>
   )
 }

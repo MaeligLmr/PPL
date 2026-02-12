@@ -8,6 +8,7 @@ import { getUser } from "@/services/auth.service"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { usePageTitle } from "@/components/layout/PageTitleContext"
+import { toast } from "sonner"
 
 export default function NewWorkoutPage() {
     const router = useRouter()
@@ -37,9 +38,11 @@ export default function NewWorkoutPage() {
         try {
             setLoading(true)
             const workout = await createWorkout(userId, selectedDate, selectedCategory)
+            toast.success('Séance créée')
             router.push(`/workout/?workout=${workout.id}`)
         } catch (error) {
             console.error('Erreur création séance:', error)
+            toast.error('Erreur lors de la création de la séance')
             setLoading(false)
         }
     }

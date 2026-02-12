@@ -4,21 +4,18 @@ import Menu from './Menu'
 import { getUser } from '@/services/auth.service'
 import { useEffect, useState } from 'react'
 import { User } from '@supabase/supabase-js'
-import { Profile } from '@/types/Profile'
-import { getProfile } from '@/services/profile.service'
+import { useProfileStore } from '@/stores/profile.store'
 
 export default function ClientMenu() {
     const { title } = usePageTitle()
     const [user, setUser] = useState<User | null>(null)
-    const [profile, setProfile] = useState<Profile | null>(null)
+    const { profile, refreshProfile } = useProfileStore()
 
     useEffect(() => {
         getUser().then((fetchedUser) => {
             setUser(fetchedUser?.data?.user ?? null)
         })
-        getProfile().then((fetchedProfile) => {
-            setProfile(fetchedProfile ?? null)
-        })
+        refreshProfile()
     }, [])
     
     if (!user) return null

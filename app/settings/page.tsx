@@ -1,9 +1,11 @@
 'use client';
 import { usePageTitle } from "@/components/layout/PageTitleContext";
+import Button from "@/components/ui/Button";
 import SettingsItem from "@/components/ui/SettingsItem";
 import ToggleColor from "@/components/ui/ToggleColor";
 import ToggleTheme from "@/components/ui/ToggleTheme";
-import { faDumbbell, faLayerGroup, faLock, faPalette, faPen, faSwatchbook } from "@fortawesome/free-solid-svg-icons";
+import { supabase } from "@/lib/supabase";
+import { faDumbbell, faLayerGroup, faLock, faPalette, faPen, faSignOut, faSwatchbook } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 
@@ -23,9 +25,15 @@ export default function SettingsPage() {
             />
 
             <SettingsItem
-            icon={<FontAwesomeIcon icon={faDumbbell} />}
+                icon={<FontAwesomeIcon icon={faDumbbell} />}
                 label="Les exercices"
                 href="/settings/exercises"
+            />
+
+            <SettingsItem
+                icon={<FontAwesomeIcon icon={faLock} />}
+                label="Mes informations"
+                href="/settings/my-infos"
             />
 
             <SettingsItem
@@ -47,10 +55,18 @@ export default function SettingsPage() {
             />
 
             <SettingsItem
-            icon={<FontAwesomeIcon icon={faPalette} />}
+                icon={<FontAwesomeIcon icon={faPalette} />}
                 label="Couleur"
                 right={<ToggleColor />}
             />
+
+            <Button
+                variant="plain"
+                leftIcon={<FontAwesomeIcon icon={faSignOut} />}
+                onClick={() => { supabase.auth.signOut().then(() => { window.location.href = '/auth/login' }) }}>
+                Se déconnecter
+            </Button>
+
         </>
     );
 }
