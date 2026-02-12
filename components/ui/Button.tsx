@@ -17,6 +17,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   rightIcon?: ReactNode
   icon?: ReactNode
   size?: 'sm' | 'md' | 'lg'
+  align?: 'left' | 'center' | 'right'
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -29,6 +30,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       rightIcon,
       icon,
       size = 'md',
+      align = 'center',
       style,
       disabled,
       className,
@@ -42,6 +44,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       | 'outlined'
       | 'plain'
 
+    const justifyContent =
+      align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : 'center'
+
     return (
       <button
         ref={ref}
@@ -51,6 +56,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           `ui-btn--${baseVariant}`,
           isIconOnly ? 'ui-btn--icon' : '',
           fullWidth ? 'ui-btn--full' : '',
+          
           `ui-btn--${size}`,
           className ?? '',
         ].join(' ')}
@@ -59,6 +65,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           opacity: disabled ? 0.6 : 1,
           minWidth: isIconOnly ? 40 : undefined,
           minHeight: isIconOnly ? 40 : undefined,
+          justifyContent,
         }}
         {...props}
       >

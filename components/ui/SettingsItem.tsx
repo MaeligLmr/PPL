@@ -35,7 +35,7 @@ export default function SettingsItem({
 
 
   if (href) {
-    return <Button variant="plain" onClick={() => goToHref()} style={{ padding: 0 }}>{content}</Button>;
+    return <Button variant="plain" align="left" onClick={() => goToHref()} style={{ padding: 0 }}>{content}</Button>;
   }
 
   return content;

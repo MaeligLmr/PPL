@@ -18,7 +18,7 @@ export default function LoginPage() {
     setError(null)
     try {
       await login(email, password)
-      window.location.href = '/'
+      window.location.href = '/PPL/'
     } catch (err) {
       setError((err as Error)?.message || 'Erreur inconnue')
     }

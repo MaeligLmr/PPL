@@ -5,7 +5,7 @@ import SettingsItem from "@/components/ui/SettingsItem";
 import ToggleColor from "@/components/ui/ToggleColor";
 import ToggleTheme from "@/components/ui/ToggleTheme";
 import { supabase } from "@/lib/supabase";
-import { faDumbbell, faLayerGroup, faLock, faPalette, faPen, faSignOut, faSwatchbook } from "@fortawesome/free-solid-svg-icons";
+import { faChildReaching, faDumbbell, faLayerGroup, faLock, faPalette, faPen, faSignOut, faSwatchbook } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 
@@ -31,7 +31,7 @@ export default function SettingsPage() {
             />
 
             <SettingsItem
-                icon={<FontAwesomeIcon icon={faLock} />}
+                icon={<FontAwesomeIcon icon={faChildReaching} />}
                 label="Mes informations"
                 href="/settings/my-infos"
             />
@@ -62,8 +62,11 @@ export default function SettingsPage() {
 
             <Button
                 variant="plain"
+                align="left"
+                style={{ paddingLeft: 0, paddingRight : 0
+                }}
                 leftIcon={<FontAwesomeIcon icon={faSignOut} />}
-                onClick={() => { supabase.auth.signOut().then(() => { window.location.href = '/auth/login' }) }}>
+                onClick={() => { supabase.auth.signOut().then(() => { window.location.href = 'PPL/auth/login' }) }}>
                 Se déconnecter
             </Button>
 

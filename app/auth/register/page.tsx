@@ -18,12 +18,16 @@ export default function SignupPage() {
   const [file, setFile] = useState<File | null>(null)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [registrationComplete, setRegistrationComplete] = useState(false)
-  const { loading, signUp } = useAuthStore() 
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const { loading, signUp } = useAuthStore()
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
+      if (password !== confirmPassword) {
+        toast.error('Les mots de passe ne correspondent pas')
+        return
+      }
       await signUp(email, password)
       await updateProfile({
         prenom: prenom || null,
@@ -32,31 +36,10 @@ export default function SignupPage() {
         mail: email,
       }, file || undefined)
       toast.success('Compte créé avec succès')
-      setRegistrationComplete(true)
+      window.location.href = '/PPL'
     } catch (err) {
       toast.error((err as Error)?.message || 'Erreur inconnue')
     }
-  }
-
-  if (registrationComplete) {
-    return (
-      <div className="auth-confirmation">
-        <h1 className="auth-title">Vérifiez votre email</h1>
-        <p className="auth-confirmation-text">
-          Un email de confirmation a été envoyé à <strong>{email}</strong>.
-        </p>
-        <p className="auth-confirmation-text">
-          Veuillez cliquer sur le lien dans l&apos;email pour activer votre compte.
-        </p>
-        <Button 
-          onClick={() => router.push('/auth/login')} 
-          fullWidth
-          style={{ marginTop: '1rem' }}
-        >
-          Aller à la page de connexion
-        </Button>
-      </div>
-    )
   }
 
   return (
@@ -93,7 +76,7 @@ export default function SignupPage() {
           placeholder="Votre pseudo"
         />
         <Input
-          type="email"
+          type="email *"
           label="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -103,13 +86,21 @@ export default function SignupPage() {
         />
         <Input
           type="password"
-          label="Mot de passe"
+          label="Mot de passe *"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
           fullWidth
           minLength={6}
-          placeholder="••••••••"
+        />
+        <Input
+          type="password"
+          label="Confirmer le mot de passe *"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+          fullWidth
+          minLength={6}
         />
         <Button type="submit" disabled={loading} fullWidth>
           {loading ? 'Création...' : 'Créer le compte'}

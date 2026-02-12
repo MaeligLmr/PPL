@@ -106,7 +106,6 @@ export default function WorkoutPage() {
                   position: 'absolute',
                   right: 0,
                   top: '100%',
-                  marginTop: '0.5rem',
                   background: 'var(--theme-tile-bg)',
                   border: '1px solid var(--theme-tile-border)',
                   borderRadius: 'var(--radius-15)',
@@ -135,7 +134,6 @@ export default function WorkoutPage() {
       </div>
       <div
         style={{
-          marginTop: '2rem',
           display: 'flex',
           flexDirection: 'column',
           gap: '1rem',

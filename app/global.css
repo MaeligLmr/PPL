@@ -424,7 +424,7 @@ select.ui-input:disabled {
     align-items: center;
     justify-content: space-between;
     padding: var(--spacing-20);
-    width: 100vw;
+    width: 100%;
 }
 
 
@@ -455,6 +455,7 @@ select.ui-input:disabled {
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    margin : 0.5rem 0;
 }
 
 .tile-subheader {
@@ -521,15 +522,11 @@ select.ui-input:disabled {
     flex-wrap: wrap;
 }
 
-.exercise-card {
-    margin-bottom: 16px;
-}
-
 .exercise-header {
     display: flex;
     align-items: center;
     gap: var(--spacing-10);
-    padding: var(--spacing-15) 0;
+    padding: var(--spacing-10) 0;
     background: var(--theme-tile-bg);
     border-radius: var(--radius-15);
     user-select: none;
