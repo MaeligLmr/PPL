@@ -18,7 +18,6 @@ export async function getWorkoutsPaginated(
   from: number,
   to: number
 ) {
-  console.log("Fetching workouts for user", userId, "from", from, "to", to);
   const { data, error } = await supabase
     .from("workout")
     .select("*, categorie: id_category(id,nom,svg)")
@@ -33,7 +32,6 @@ export async function getWorkoutsPaginated(
 
 
 export async function getWorkoutById(workoutId: string) {
-    console.log("Fetching workout with id", workoutId)
   const { data, error } = await supabase
     .from("workout")
     .select(`

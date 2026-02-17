@@ -15,6 +15,7 @@ h1,
 h2 {
     font-family: "Lilita One", sans-serif;
     text-transform: uppercase;
+    color : var(--theme-title-text);
     margin: 0;
     text-align: center;
 }
@@ -113,9 +114,6 @@ ul {
 
 }
 
-.ui-btn--filled:hover:not(:disabled) {
-    background: var(--theme-button-primary-bg-hover);
-}
 
 .ui-btn--outlined {
     border: 2px solid var(--theme-button-outlined-text);
@@ -123,18 +121,12 @@ ul {
     background: transparent;
 }
 
-.ui-btn--outlined:hover:not(:disabled) {
-    background: var(--theme-button-outlined-hover-bg);
-}
 
 .ui-btn--plain {
     color: var(--theme-button-outlined-text);
     background: transparent;
 }
 
-.ui-btn--plain:hover:not(:disabled) {
-    background: var(--theme-button-outlined-hover-bg);
-}
 
 .ui-btn--icon {
     padding: var(--spacing-10);
@@ -227,10 +219,6 @@ select {
     background-color: #e5e7eb;
 }
 
-.avatar-hover-enabled:hover .avatar-circle {
-    outline: 2px solid var(--theme-title-text);
-    outline-offset: 2px;
-}
 
 .avatar-image {
     width: 100%;
@@ -241,11 +229,6 @@ select {
 .avatar-username {
     color: var(--theme-text);
     font-weight: 600;
-}
-
-.avatar-hover-enabled:hover .avatar-username {
-    font-weight: 700;
-    text-decoration: underline;
 }
 
 .ui-input-container {
@@ -278,9 +261,7 @@ select {
     transition: transform 0.2s;
 }
 
-.ui-input-file-avatar:hover {
-    transform: scale(1.05);
-}
+
 
 .ui-input-file-avatar-image {
     width: 100%;
@@ -311,7 +292,7 @@ select {
     transition: opacity 0.2s;
 }
 
-.ui-input-file-avatar:hover .ui-input-file-avatar-overlay {
+.ui-input-file-avatar-overlay {
     opacity: 1;
 }
 
@@ -455,7 +436,7 @@ select.ui-input:disabled {
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    margin : 0.5rem 0;
+    margin: 0.5rem 0;
 }
 
 .tile-subheader {
@@ -515,6 +496,63 @@ select.ui-input:disabled {
     color: var(--theme-toggle-item-text-selected);
 }
 
+.performances-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-15);
+}
+
+.performances-title {
+    color: var(--theme-title-text);
+    margin: 0;
+}
+
+.performance-chart-container {
+    background: var(--theme-tile-bg);
+    border-radius: var(--radius-15);
+    padding: var(--spacing-20);
+    border: 1px solid var(--theme-tile-border);
+}
+
+/* Tabs Component */
+.tabs-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-20);
+}
+
+.tabs-nav {
+    display: flex;
+    background: var(--theme-tile-bg);
+    padding: 4px;
+    gap: 4px;
+}
+
+.tab-button {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: var(--spacing-10) var(--spacing-15);
+    cursor: pointer;
+    font: var(--font-body);
+    font-weight: 600;
+    color: var(--theme-text);
+    transition: all 0.2s ease;
+}
+
+
+.tab-button--active {
+    border-bottom : solid 2px var(--theme-button-primary-bg);
+}
+
+
+.tab-content {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-20);
+}
+
 .filters {
     display: flex;
     gap: 8px;
@@ -532,9 +570,6 @@ select.ui-input:disabled {
     user-select: none;
 }
 
-.exercise-header:hover {
-    background: var(--theme-button-outlined-hover-bg);
-}
 
 .exercise-details {
     border-left: 2px solid var(--theme-button-outlined-text);
@@ -547,7 +582,7 @@ select.ui-input:disabled {
 
 .set-row {
     margin-bottom: var(--spacing-15);
-    
+
 }
 
 .set-header {
@@ -561,20 +596,17 @@ select.ui-input:disabled {
     background: var(--theme-tile-bg);
     border-radius: var(--radius-10);
     margin-bottom: 0;
-    padding-right : 0;
+    padding-right: 0;
 }
 
-.set-title { 
-    display: flex; 
+.set-title {
+    display: flex;
     align-items: center;
     gap: var(--spacing-10);
-    width : 100%;
+    width: 100%;
 
 }
 
-.set-header:hover {
-    background: var(--theme-button-outlined-hover-bg) !important;
-}
 
 .reps-container {
     background: var(--theme-body-bg);
@@ -588,7 +620,7 @@ select.ui-input:disabled {
     gap: var(--spacing-10);
     align-items: flex-end;
     margin-bottom: var(--spacing-10);
-    width : 100%;
+    width: 100%;
 }
 
 input {
@@ -614,6 +646,7 @@ input {
     background: linear-gradient(90deg, #3c4bff, #5a6bff);
     color: white;
 }
+
 /* My Infos Page */
 .my-infos-container {
     padding: 1rem;

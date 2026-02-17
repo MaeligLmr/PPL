@@ -78,7 +78,7 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <>
       {workouts.map((workout) => (
         <WorkoutTile key={workout.id} workout={workout} />
       ))}
@@ -98,6 +98,6 @@ export default function Home() {
       }
         onClick={goToNew}
       />
-    </div>
+    </>
   );
 }

@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase"
-import { Preferences, Profile, BestPerf, PistePoids } from "@/types/Profile"
+import { Preferences, Profile, BestPerf, PistePoids, ExoPerf } from "@/types/Profile"
 
 async function getCurrentUserId() {
   const { data, error } = await supabase.auth.getUser()
@@ -27,7 +27,6 @@ export async function getProfile(): Promise<Profile> {
 
 export async function updateProfile(values: Partial<Profile>, file?: File) {
   const userId = await getCurrentUserId()
-  console.log(file)
   const url = file ? await uploadAvatar(file) : undefined
 
   const { error } = await supabase
@@ -122,7 +121,6 @@ async function uploadAvatar(file: File) {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("upload_preset", "ppl-avatars"); // nom preset
-  console.log(process.env.NEXT_PUBLIC_CLOUD_NAME)
   const res = await fetch(
     `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUD_NAME}/image/upload`,
     {
@@ -132,7 +130,6 @@ async function uploadAvatar(file: File) {
   );
 
   const data = await res.json();
-  console.log('Cloudinary response:', data);
   return data.secure_url;
 }
 
@@ -149,4 +146,18 @@ const chartData: PistePoids[] = historique?.map((item) => ({
   poids: item.poids as number,
 })) ?? []; 
   return chartData;
+}
+
+export async function getExoPerfs(): Promise<ExoPerf[] | null> {
+  const userId = await getCurrentUserId()
+  const { data, error } = await supabase
+    .rpc("get_exo_perfs", { user_uuid: userId });
+
+  if (error) {
+    console.error("Erreur getExoPerfs:", error);
+    return null;
+  }
+
+  // Supabase retourne JSONB sous forme de string, on parse
+  return data as ExoPerf[];
 }

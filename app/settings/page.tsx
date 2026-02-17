@@ -63,8 +63,7 @@ export default function SettingsPage() {
             <Button
                 variant="plain"
                 align="left"
-                style={{ paddingLeft: 0, paddingRight : 0
-                }}
+                style={{ paddingLeft: 0, paddingRight : 0, color : 'var(--theme-text)' }}
                 leftIcon={<FontAwesomeIcon icon={faSignOut} />}
                 onClick={() => { supabase.auth.signOut().then(() => { window.location.href = 'PPL/auth/login' }) }}>
                 Se déconnecter

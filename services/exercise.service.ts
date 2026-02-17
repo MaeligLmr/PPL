@@ -22,7 +22,6 @@ export async function getExercisesWithPreferences(id_category: string | null = n
     `)
 
   const { data, error } = await query;
-  console.log("Fetched exercises:", data)
   
   if (error) throw error;
 
@@ -32,7 +31,6 @@ export async function getExercisesWithPreferences(id_category: string | null = n
     return categories.some((c) => c?.id === id_category);
   }) ?? [];
   
-  console.log("Filtered exercises:", filteredData)
 
   return filteredData.map((exo: ExerciseRow) => {
     const categories = exo.exo_categorie?.flatMap((ec) => ec.categorie) ?? [];

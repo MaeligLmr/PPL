@@ -23,4 +23,17 @@ export type BestPerf = {
   workout_date: string
 }
 
+export type ExoPerf = {
+  exo_id: string
+  exo_nom: string
+  perfs: Perf[]
+}
+
+export type Perf = {
+  reps: number
+  charge: number
+  workout_id: string
+  workout_date: string
+}
+
 export type PistePoids = {date: string, poids: number }
