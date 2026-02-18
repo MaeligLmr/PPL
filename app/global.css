@@ -15,7 +15,7 @@ h1,
 h2 {
     font-family: "Lilita One", sans-serif;
     text-transform: uppercase;
-    color : var(--theme-title-text);
+    color: var(--theme-title-text);
     margin: 0;
     text-align: center;
 }
@@ -496,6 +496,44 @@ select.ui-input:disabled {
     color: var(--theme-toggle-item-text-selected);
 }
 
+/* Sound options styles */
+.sound-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-15);
+}
+
+.sound-option {
+    display: flex;
+    gap: var(--spacing-15);
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-15);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-10);
+    background: var(--theme-card-bg);
+}
+
+.sound-info h3 {
+    margin: 0;
+    color: var(--theme-text);
+    font-size: 1rem;
+    font-weight: 600;
+    width: 100%;
+}
+.sound-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-10);
+    width : 100%;
+}
+
+.sound-actions {
+    display: flex;
+    gap: var(--spacing-10);
+    align-items: center;
+}
+
 .performances-section {
     display: flex;
     flex-direction: column;
@@ -542,7 +580,7 @@ select.ui-input:disabled {
 
 
 .tab-button--active {
-    border-bottom : solid 2px var(--theme-button-primary-bg);
+    border-bottom: solid 2px var(--theme-button-primary-bg);
 }
 
 

@@ -5,15 +5,31 @@ import SettingsItem from "@/components/ui/SettingsItem";
 import ToggleColor from "@/components/ui/ToggleColor";
 import ToggleTheme from "@/components/ui/ToggleTheme";
 import { supabase } from "@/lib/supabase";
-import { faChildReaching, faDumbbell, faLayerGroup, faLock, faPalette, faPen, faSignOut, faSwatchbook } from "@fortawesome/free-solid-svg-icons";
+import { getProfile } from "@/services/profile.service";
+import { Profile } from "@/types/Profile";
+import { faChildReaching, faDumbbell, faLayerGroup, faLock, faPalette, faPen, faSignOut, faSwatchbook, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function SettingsPage() {
     const { setTitle } = usePageTitle()
+    const [profile, setProfile] = useState<Profile | null>(null)
+
     useEffect(() => {
         setTitle('Paramètres')
     }, [setTitle])
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const profileData = await getProfile()
+                setProfile(profileData)
+            } catch (error) {
+                console.error('Erreur lors du chargement du profil:', error)
+            }
+        }
+        fetchProfile()
+    }, [])
 
     return (
         <>
@@ -60,10 +76,18 @@ export default function SettingsPage() {
                 right={<ToggleColor />}
             />
 
+            {profile?.premium && (
+                <SettingsItem
+                    icon={<FontAwesomeIcon icon={faVolumeUp} />}
+                    label="Son"
+                    href="/settings/sounds"
+                />
+            )}
+
             <Button
                 variant="plain"
                 align="left"
-                style={{ paddingLeft: 0, paddingRight : 0, color : 'var(--theme-text)' }}
+                style={{ paddingLeft: 0, paddingRight: 0, color: 'var(--theme-text)' }}
                 leftIcon={<FontAwesomeIcon icon={faSignOut} />}
                 onClick={() => { supabase.auth.signOut().then(() => { window.location.href = 'PPL/auth/login' }) }}>
                 Se déconnecter

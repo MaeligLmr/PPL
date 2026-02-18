@@ -158,6 +158,7 @@ export function SetRow({ set, onUpdate, workoutId }: { set: Serie, onUpdate?: ()
             leftIcon={<FontAwesomeIcon icon={faPlus} />}
             onClick={handleAddRep}
             fullWidth
+            playSound={true}
           >
             Ajouter une rep
           </Button>

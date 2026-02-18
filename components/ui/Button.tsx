@@ -1,6 +1,7 @@
 'use client'
 
 import { ButtonHTMLAttributes, ReactNode, forwardRef } from 'react'
+import { playUserSound } from '@/services/sound.service'
 
 type ButtonVariant =
   | 'filled'
@@ -18,6 +19,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   icon?: ReactNode
   size?: 'sm' | 'md' | 'lg'
   align?: 'left' | 'center' | 'right'
+  playSound?: boolean // Nouvelle prop pour activer le son
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -31,9 +33,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       icon,
       size = 'md',
       align = 'center',
+      playSound = true,
       style,
       disabled,
       className,
+      onClick,
       ...props
     },
     ref
@@ -47,6 +51,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const justifyContent =
       align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : 'center'
 
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (playSound) {
+        playUserSound();
+      }
+      onClick?.(e);
+    };
+
     return (
       <button
         ref={ref}
@@ -56,7 +67,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           `ui-btn--${baseVariant}`,
           isIconOnly ? 'ui-btn--icon' : '',
           fullWidth ? 'ui-btn--full' : '',
-          
+
           `ui-btn--${size}`,
           className ?? '',
         ].join(' ')}
@@ -67,6 +78,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           minHeight: isIconOnly ? 40 : undefined,
           justifyContent,
         }}
+        onClick={handleClick}
         {...props}
       >
         {isIconOnly ? (

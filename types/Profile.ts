@@ -7,6 +7,8 @@ export type Profile = {
   photo_url: string | null
   poids: number | null
   taille: number | null
+  son: string | null
+  premium : boolean
 }
 
 export type Preferences = {
@@ -36,4 +38,4 @@ export type Perf = {
   workout_date: string
 }
 
-export type PistePoids = {date: string, poids: number }
+export type PistePoids = { date: string, poids: number }

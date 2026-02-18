@@ -141,11 +141,22 @@ export async function getWeightHistory(): Promise<PistePoids[]> {
     .eq("user_id", userId)
     .order("date", { ascending: true });
 
-const chartData: PistePoids[] = historique?.map((item) => ({
-  date: item.date.slice(0, 10) as string,
-  poids: item.poids as number,
-})) ?? []; 
+  const chartData: PistePoids[] = historique?.map((item) => ({
+    date: item.date.slice(0, 10) as string,
+    poids: item.poids as number,
+  })) ?? [];
   return chartData;
+}
+
+export async function updateSound(soundFile: string | null) {
+  const userId = await getCurrentUserId()
+
+  const { error } = await supabase
+    .from('profil')
+    .update({ son: soundFile })
+    .eq('id', userId)
+
+  if (error) throw error
 }
 
 export async function getExoPerfs(): Promise<ExoPerf[] | null> {
