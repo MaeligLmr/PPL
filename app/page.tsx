@@ -5,6 +5,7 @@ import { getWorkoutsPaginated } from "@/services/workout.service";
 import { usePageTitle } from "@/components/layout/PageTitleContext";
 import { getUser } from "@/services/auth.service";
 import Button from "@/components/ui/Button";
+import Loader from "@/components/ui/Loader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Workout } from "@/types/Workout";
@@ -85,7 +86,7 @@ export default function Home() {
 
       {hasMore && (
         <div ref={loaderRef} className="p-4 text-center">
-          Chargement...
+          <Loader />
         </div>
       )}
 
@@ -95,7 +96,7 @@ export default function Home() {
         className="fab-button"
         aria-label="Ajouter une séance"
         icon={<FontAwesomeIcon icon={faPlus} />
-      }
+        }
         onClick={goToNew}
       />
     </>

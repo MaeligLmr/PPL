@@ -10,6 +10,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { toast } from 'sonner'
 import { useProfileStore } from '@/stores/profile.store'
+import Loader from '@/components/ui/Loader'
 
 export default function EditProfilePage() {
   const [loading, setLoading] = useState(true)
@@ -67,58 +68,58 @@ export default function EditProfilePage() {
     }
   }
 
-  if (loading) return <div>Chargement...</div>
+  if (loading) return <div className="content"><Loader /></div>
 
   return (
     <>
-      <Button variant='icon-plain' 
+      <Button variant='icon-plain'
         onClick={() => window.history.back()}
-        icon={<FontAwesomeIcon icon={faArrowLeft} />}/>
+        icon={<FontAwesomeIcon icon={faArrowLeft} />} />
 
-      
-        <form onSubmit={handleSubmit}>
-          <InputFile
-            label="Photo de profil"
-            onFileChange={setFile}
-            currentImageUrl={photoUrl}
-            fullWidth
-          />
-          <Input
-            type="text"
-            label="Prénom"
-            value={prenom}
-            onChange={(e) => setPrenom(e.target.value)}
-            fullWidth
-            placeholder="Votre prénom"
-          />
-          <Input
-            type="text"
-            label="Nom"
-            value={nom}
-            onChange={(e) => setNom(e.target.value)}
-            fullWidth
-            placeholder="Votre nom"
-          />
-          <Input
-            type="text"
-            label="Pseudo"
-            value={pseudo}
-            onChange={(e) => setPseudo(e.target.value)}
-            fullWidth
-            placeholder="Votre pseudo"
-          />
-          <Input
-            type="email"
-            label="Email"
-            value={mail}
-            onChange={(e) => setMail(e.target.value)}
-            fullWidth
-            placeholder="votre.email@exemple.com"
-          />
-          <Button type="submit" disabled={saving} fullWidth>
-            {saving ? 'Enregistrement...' : 'Enregistrer les modifications'}
-          </Button>
-        </form>
+
+      <form onSubmit={handleSubmit}>
+        <InputFile
+          label="Photo de profil"
+          onFileChange={setFile}
+          currentImageUrl={photoUrl}
+          fullWidth
+        />
+        <Input
+          type="text"
+          label="Prénom"
+          value={prenom}
+          onChange={(e) => setPrenom(e.target.value)}
+          fullWidth
+          placeholder="Votre prénom"
+        />
+        <Input
+          type="text"
+          label="Nom"
+          value={nom}
+          onChange={(e) => setNom(e.target.value)}
+          fullWidth
+          placeholder="Votre nom"
+        />
+        <Input
+          type="text"
+          label="Pseudo"
+          value={pseudo}
+          onChange={(e) => setPseudo(e.target.value)}
+          fullWidth
+          placeholder="Votre pseudo"
+        />
+        <Input
+          type="email"
+          label="Email"
+          value={mail}
+          onChange={(e) => setMail(e.target.value)}
+          fullWidth
+          placeholder="votre.email@exemple.com"
+        />
+        <Button type="submit" disabled={saving} fullWidth>
+          {saving ? 'Enregistrement...' : 'Enregistrer les modifications'}
+        </Button>
+      </form>
     </>
   )
 }

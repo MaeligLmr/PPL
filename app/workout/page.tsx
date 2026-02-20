@@ -8,6 +8,7 @@ import { usePageTitle } from '@/components/layout/PageTitleContext'
 import Button from '@/components/ui/Button'
 import { toast } from 'sonner'
 import ConfirmDialog from '@/components/ui/ConfirmDialog'
+import Loader from '@/components/ui/Loader'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faEllipsisVertical, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { ExerciseCard } from '@/components/workout/ExerciceCard'
@@ -64,7 +65,11 @@ export default function WorkoutPage() {
   }
 
   if (loading) {
-    return <div className="content">Chargement...</div>
+    return (
+      <div className="content">
+        <Loader />
+      </div>
+    )
   }
 
   if (error || !workout) {
@@ -83,25 +88,25 @@ export default function WorkoutPage() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <span className='tag'>{workout.categorie?.nom || 'Séance'}</span>
         <div style={{ position: 'relative' }}>
-          <Button 
-            variant="icon-plain" 
+          <Button
+            variant="icon-plain"
             icon={<FontAwesomeIcon icon={faEllipsisVertical} />}
             onClick={() => setShowMenu(!showMenu)}
           />
           {showMenu && (
             <>
-              <div 
-                style={{ 
-                  position: 'fixed', 
-                  top: 0, 
-                  left: 0, 
-                  right: 0, 
-                  bottom: 0, 
-                  zIndex: 999 
+              <div
+                style={{
+                  position: 'fixed',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  zIndex: 999
                 }}
                 onClick={() => setShowMenu(false)}
               />
-              <div 
+              <div
                 style={{
                   position: 'absolute',
                   right: 0,
@@ -115,8 +120,8 @@ export default function WorkoutPage() {
                   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
                 }}
               >
-                <Button 
-                  variant="plain" 
+                <Button
+                  variant="plain"
                   fullWidth
                   leftIcon={<FontAwesomeIcon icon={faTrash} />}
                   onClick={() => {

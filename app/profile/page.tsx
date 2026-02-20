@@ -12,6 +12,7 @@ import Tabs, { TabItem } from '@/components/ui/Tabs'
 import Button from '@/components/ui/Button'
 import { useRouter } from 'next/navigation'
 import { usePageTitle } from '@/components/layout/PageTitleContext'
+import Loader from '@/components/ui/Loader'
 
 export default function ProfilePage() {
   const [loading, setLoading] = useState(true)
@@ -99,7 +100,7 @@ export default function ProfilePage() {
     }
   ]
 
-  if (loading) return <div>Chargement...</div>
+  if (loading) return <div className="content"><Loader/></div>
 
   return (
     <>
