@@ -1,18 +1,18 @@
 export type Exercise = {
-    id: number;
+    id: string;
     nom: string;
     svg: string | null;
     hidden?: boolean;
     categories?: {
-        id: number;
+        id: string;
         nom: string;
     }[];
 };
 
 export type ExerciseRow = {
-    id: number;
+    id: string;
     nom: string;
     svg: string | null;
-    exo_categorie?: { categorie: { id: number; nom: string }[] }[];
+    exo_categorie?: { categorie: { id: string; nom: string }[] }[];
     user_exo_preferences?: { hidden: boolean }[];
 };

@@ -3,7 +3,7 @@ import { usePageTitle } from "@/components/layout/PageTitleContext";
 import Button from "@/components/ui/Button";
 import { getProfile, updateSound } from "@/services/profile.service";
 import { playSound, invalidateSoundCache } from "@/services/sound.service";
-import { faPlay, faCheck, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
+import { faPlay, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -19,7 +19,10 @@ const soundOptions: SoundOption[] = [
     { name: 'none', file: '', label: 'Aucun son' },
     { name: 'beep', file: 'sound1.mp3', label: 'Bip classique' },
     { name: 'ding', file: 'sound2.mp3', label: 'Ding' },
-    { name: 'bell', file: 'sound3.mp3', label: 'Cloche' }
+    { name: 'bell', file: 'sound3.mp3', label: 'Cloche' },
+    { name: 'bip', file: 'Bip.m4a', label: 'Bip mae' },
+    { name : 'ploc', file: 'Ploc.m4a', label: 'Ploc mae' },
+    { name : 'tut', file: 'Tut.m4a', label: 'Tut mae' },
 ];
 
 export default function SoundsPage() {
@@ -86,14 +89,6 @@ export default function SoundsPage() {
             toast.error('Erreur lors de la mise à jour du son');
         } finally {
             setIsUpdating(false);
-        }
-    };
-
-    const playCurrentSound = () => {
-        if (currentSound) {
-            playSound(currentSound);
-        } else {
-            toast.info('Aucun son sélectionné');
         }
     };
 

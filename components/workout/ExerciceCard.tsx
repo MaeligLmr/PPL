@@ -1,7 +1,7 @@
 import { WorkoutLineWithDetails } from "@/types/Workout";
 import { SetRow } from "./SetRow";
 import { useEffect, useState } from "react";
-import Select, { SelectOption } from "../ui/Select";
+import Select, { CustomSelectOption } from "../ui/Select";
 import { getExercisesForSelect } from "@/services/exercise.service";
 import Button from "../ui/Button";
 import ConfirmDialog from "../ui/ConfirmDialog";
@@ -17,7 +17,7 @@ export function ExerciseCard({ exercise, id_category, isNew, onExerciseUpdate, w
     const saved = localStorage.getItem(`workout_${workoutId}_exercise_${exercise.id}_expanded`);
     return saved ? JSON.parse(saved) : false;
   });
-  const [exercises, setExercises] = useState<SelectOption[]>([]);
+  const [exercises, setExercises] = useState<CustomSelectOption[]>([]);
   const [selectedExercise, setSelectedExercise] = useState<string | null>(exercise.exercise?.id || null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
@@ -29,7 +29,7 @@ export function ExerciseCard({ exercise, id_category, isNew, onExerciseUpdate, w
   };
   useEffect(() => {
     getExercisesForSelect(id_category).then((data) => {
-      setExercises(data as SelectOption[]);
+      setExercises(data as CustomSelectOption[]);
       // Initialiser selectedExercise avec l'exercice actuel
       if (exercise.exercise?.id) {
         setSelectedExercise(exercise.exercise.id);
@@ -91,10 +91,8 @@ export function ExerciseCard({ exercise, id_category, isNew, onExerciseUpdate, w
             <Select
               options={[{ label: 'Choisir un exercice', value: '' }, ...exercises]}
               value={selectedExercise || ""}
-              onChange={e => setSelectedExercise(e.target.value)}
-              style={{ flex: 1 }}
+              onChange={(value) => setSelectedExercise(value)}
               fullWidth
-              onClick={(e) => e.stopPropagation()}
             />
           ) : (
             <span style={{ flex: 1 }}>{exercise.exercise?.nom || 'Nouvel exercice'}</span>

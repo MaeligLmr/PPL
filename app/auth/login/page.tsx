@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAuthStore } from '@/stores/auth.store'
 import Button from '@/components/ui/Button'
@@ -23,6 +22,7 @@ export default function LoginPage() {
       setError((err as Error)?.message || 'Erreur inconnue')
     }
   }
+
 
   return (
     <div className="content">

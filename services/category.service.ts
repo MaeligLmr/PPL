@@ -1,4 +1,4 @@
-import { SelectOption } from "@/components/ui/Select";
+import { CustomSelectOption } from "@/components/ui/Select";
 import { supabase } from "@/lib/supabase";
 import { Category } from "@/types/Category";
 
@@ -13,7 +13,7 @@ export async function getCategories(): Promise<Category[]> {
   return data ?? [];
 }
 
-export async function getCategoriesForSelect(): Promise<SelectOption[]> {
+export async function getCategoriesForSelect(): Promise<CustomSelectOption[]> {
   const categories = await getCategories();
   return categories.map(c => ({ label: c.nom, value: c.id.toString() }));
 }

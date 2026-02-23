@@ -13,17 +13,21 @@ import { usePageTitle } from "@/components/layout/PageTitleContext";
 import Toggle from "@/components/ui/Toggle";
 import SettingsItem from "@/components/ui/SettingsItem";
 import Input from "@/components/ui/Input";
-import Select, { SelectOption } from "@/components/ui/Select";
+import Select, { CustomSelectOption } from "@/components/ui/Select";
 import { getCategoriesForSelect } from "@/services/category.service";
+import Loader from "@/components/ui/Loader";
+import { toast } from "sonner";
 
 export default function ExercisesPage() {
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [categories, setCategories] = useState<SelectOption[]>([]);
-  async function load() {
-    const data = await getExercisesWithPreferences();
-    setExercises(data as Exercise[]);
+  const [categories, setCategories] = useState<CustomSelectOption[]>([]);
+  const [loading, setLoading] = useState(true);
+  
+   function load() {
+    getExercisesWithPreferences().then((data) => setExercises(data as Exercise[])).catch(() => {toast.error("Erreur lors du chargement des exercices.")}).finally(() => setLoading(false));
+    
   }
 
   const { setTitle } = usePageTitle();
@@ -33,7 +37,7 @@ export default function ExercisesPage() {
   }, [setTitle]);
 
   useEffect(() => {
-    getExercisesWithPreferences().then(data => setExercises(data as Exercise[]));
+    load();
   }, []);
 
   async function handleToggle(exo: Exercise) {
@@ -41,19 +45,21 @@ export default function ExercisesPage() {
     load();
   }
 
-  // Extraire toutes les catégories uniques
   useEffect(() => {
     getCategoriesForSelect().then(setCategories);
   }, []);
 
-  // Filtrage dynamique
   const filteredExercises = exercises.filter((exo) => {
     const matchSearch = exo.nom.toLowerCase().includes(search.toLowerCase());
     const matchCategory =
       !selectedCategory ||
-      (exo.categories && exo.categories.some((c) => c.nom === selectedCategory));
+      (exo.categories && exo.categories.some((c) => c.id === selectedCategory));
     return matchSearch && matchCategory;
   });
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -69,13 +75,26 @@ export default function ExercisesPage() {
         <Select
           options={[{ label: "Toutes catégories", value: "" }, ...categories]}
           value={selectedCategory}
-          onChange={e => setSelectedCategory(e.target.value)}
+          onChange={(value: string) => {setSelectedCategory(value)}}
           fullWidth
         />
       </div>
       {filteredExercises.map((exo) => (
         <SettingsItem
           key={exo.id}
+          icon={exo.svg ? (
+            <div 
+              dangerouslySetInnerHTML={{ __html: exo.svg }} 
+              style={{ 
+                width: '24px', 
+                height: '24px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }} 
+              className="exercise-icon"
+            />
+          ) : null}
           label={exo.nom + (exo.categories ? ` (${exo.categories.map(c => c.nom).join(", ")})` : "")}
           right={
             <Toggle

@@ -21,8 +21,6 @@ export default function EditProfilePage() {
   const [mail, setMail] = useState('')
   const [photoUrl, setPhotoUrl] = useState('')
   const [file, setFile] = useState<File | null>(null)
-  const [poids, setPoids] = useState<string>('')
-  const [taille, setTaille] = useState<string>('')
   const { refreshProfile } = useProfileStore()
 
   const { setTitle } = usePageTitle()
@@ -38,8 +36,6 @@ export default function EditProfilePage() {
         setPseudo(profile.pseudo ?? '')
         setMail(profile.mail ?? '')
         setPhotoUrl(profile.photo_url ?? '')
-        setPoids(profile.poids?.toString() ?? '')
-        setTaille(profile.taille?.toString() ?? '')
       })
       .catch((err) => {
         toast.error((err as Error)?.message || 'Erreur lors du chargement du profil')

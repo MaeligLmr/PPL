@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAuthStore } from '@/stores/auth.store'
 import Button from '@/components/ui/Button'
@@ -11,7 +10,6 @@ import { updateProfile } from '@/services/profile.service'
 import { toast } from 'sonner'
 
 export default function SignupPage() {
-  const router = useRouter()
   const [prenom, setPrenom] = useState('')
   const [nom, setNom] = useState('')
   const [pseudo, setPseudo] = useState('')
@@ -41,6 +39,7 @@ export default function SignupPage() {
       toast.error((err as Error)?.message || 'Erreur inconnue')
     }
   }
+
 
   return (
     <>

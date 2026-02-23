@@ -8,18 +8,26 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "@/components/ui/Button";
 import SettingsItem from "@/components/ui/SettingsItem";
+import Loader from "@/components/ui/Loader";
+import { toast } from "sonner";
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState<Category[]>([]);
+    const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
-    getCategories().then(setCategories);
+    getCategories().then(setCategories).catch(() => toast.error("Erreur lors du chargement des catégories.")).finally(() => setLoading(false));
   }, []);
   const  { setTitle } = usePageTitle();
 
   useEffect(() => {
     setTitle("Catégories");
   }, [setTitle]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { SelectOption } from "@/components/ui/Select";
+import { CustomSelectOption } from "@/components/ui/Select";
 import { supabase } from "@/lib/supabase";
 import { Exercise, ExerciseRow } from "@/types/Exercise";
 
@@ -31,8 +31,7 @@ export async function getExercisesWithPreferences(id_category: string | null = n
     return categories.some((c) => c?.id === id_category);
   }) ?? [];
   
-
-  return filteredData.map((exo: ExerciseRow) => {
+  const exercises = filteredData.map((exo: ExerciseRow) => {
     const categories = exo.exo_categorie?.flatMap((ec) => ec.categorie) ?? [];
     return {
       id: exo.id,
@@ -42,18 +41,24 @@ export async function getExercisesWithPreferences(id_category: string | null = n
       categories,
     } as Exercise;
   });
+
+  
+    return exercises.filter((exo) => !exo.hidden);
+
+  
 }
 
-export async function getExercisesForSelect(id_category: string): Promise<SelectOption[]> {
+export async function getExercisesForSelect(id_category: string): Promise<CustomSelectOption[]> {
   const exercises = await getExercisesWithPreferences(id_category);
   return exercises.map((exo) => ({
     value: String(exo.id),
     label: exo.nom,
+    icon : exo.svg || undefined
   }));
 }
 
 export async function toggleExerciseHidden(
-  exoId: number,
+  exoId: string,
   hidden: boolean
 ) {
   const user = (await supabase.auth.getUser()).data.user;

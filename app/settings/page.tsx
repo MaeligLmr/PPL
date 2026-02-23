@@ -48,13 +48,13 @@ export default function SettingsPage() {
 
             <SettingsItem
                 icon={<FontAwesomeIcon icon={faChildReaching} />}
-                label="Mes informations"
+                label="Mes informations physiques"
                 href="/settings/my-infos"
             />
 
             <SettingsItem
                 icon={<FontAwesomeIcon icon={faPen} />}
-                label="Modifier mes informations"
+                label="Modifier mon profil"
                 href="/settings/edit-profile"
             />
 

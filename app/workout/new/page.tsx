@@ -1,7 +1,7 @@
 'use client'
 import Button from "@/components/ui/Button"
 import DatePicker from "@/components/ui/DatePicker"
-import Select, { SelectOption } from "@/components/ui/Select"
+import Select, { CustomSelectOption } from "@/components/ui/Select"
 import { getCategoriesForSelect } from "@/services/category.service"
 import { createWorkout } from "@/services/workout.service"
 import { getUser } from "@/services/auth.service"
@@ -14,7 +14,7 @@ import Image from "next/image"
 
 export default function NewWorkoutPage() {
     const router = useRouter()
-    const [categories, setCategories] = useState<SelectOption[]>([])
+    const [categories, setCategories] = useState<CustomSelectOption[]>([])
     const [selectedCategory, setSelectedCategory] = useState<string>("")
     const [selectedDate, setSelectedDate] = useState<string>(new Date().toISOString().split('T')[0])
     const [loading, setLoading] = useState(false)
@@ -73,12 +73,12 @@ export default function NewWorkoutPage() {
                 <Select
                     options={categories}
                     value={selectedCategory}
-                    onChange={(e) => setSelectedCategory(e.target.value)}
+                    onChange={(value: string) => { setSelectedCategory(value) }}
                     fullWidth
                 />
                 <DatePicker
                     value={selectedDate}
-                    onChange={(date) => setSelectedDate(date.target.value)}
+                    onChange={(e) => setSelectedDate(e.target.value)}
                 />
                 <Button
                     variant="filled"

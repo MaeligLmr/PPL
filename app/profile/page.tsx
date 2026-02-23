@@ -13,6 +13,7 @@ import Button from '@/components/ui/Button'
 import { useRouter } from 'next/navigation'
 import { usePageTitle } from '@/components/layout/PageTitleContext'
 import Loader from '@/components/ui/Loader'
+import { toast } from 'sonner'
 
 export default function ProfilePage() {
   const [loading, setLoading] = useState(true)
@@ -31,13 +32,18 @@ export default function ProfilePage() {
   useEffect(() => {
     getProfile().then((fetchedProfile) => {
       setProfile(fetchedProfile)
-      setLoading(false)
-    })
+    }).catch(() => {
+      toast.error("Erreur lors du chargement du profil.")
+    }).finally(() => setLoading(false))
     getBestPerfs().then((fetchedPerfs) => {
       setBestPerfList(fetchedPerfs)
+    }).catch(() => {
+      toast.error("Erreur lors du chargement des meilleures performances.")
     })
     getExoPerfs().then((fetchedExoPerfs) => {
       setExoPerfList(fetchedExoPerfs ?? [])
+    }).catch(() => {
+      toast.error("Erreur lors du chargement des performances par exercice.")
     })
   }, [])
 
