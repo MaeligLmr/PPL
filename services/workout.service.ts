@@ -44,7 +44,8 @@ export async function getWorkoutById(workoutId: string) {
         *,
         exercise: id_exo (
           id,
-          nom
+          nom,
+          svg
         ),
         serie (*,
           reps(*)

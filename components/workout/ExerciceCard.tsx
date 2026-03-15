@@ -95,7 +95,22 @@ export function ExerciseCard({ exercise, id_category, isNew, onExerciseUpdate, w
               fullWidth
             />
           ) : (
-            <span style={{ flex: 1 }}>{exercise.exercise?.nom || 'Nouvel exercice'}</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-10)', flex: 1 }}>
+              {exercise.exercise?.svg ? (
+                <div
+                  className="exercise-icon"
+                  style={{
+                    width: '24px',
+                    height: '24px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                  dangerouslySetInnerHTML={{ __html: exercise.exercise.svg }}
+                />
+              ) : null}
+              {exercise.exercise?.nom || 'Nouvel exercice'}
+            </span>
           )}
         </div>
 

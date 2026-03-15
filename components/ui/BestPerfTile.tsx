@@ -22,7 +22,22 @@ export function BestPerfTile({ perf }: Props) {
       onClick={handleClick}
     >
       <div className='tile-infos'>
-        <p className='tile-header'>{perf.exo_nom}</p>
+        <span className='tile-header' style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-10)' }}>
+          {perf.exo_svg ? (
+            <div
+              className="exercise-icon"
+              style={{
+                width: '24px',
+                height: '24px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              dangerouslySetInnerHTML={{ __html: perf.exo_svg }}
+            ></div>
+          ) : null}
+          {perf.exo_nom}
+        </span>
         <p className='tile-subheader'>Le {date}</p>
 
       </div>

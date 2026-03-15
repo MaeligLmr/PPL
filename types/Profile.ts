@@ -19,6 +19,7 @@ export type Preferences = {
 export type BestPerf = {
   exo_id: string
   exo_nom: string
+  exo_svg?: string | null
   charge: number
   reps: number
   workout_id: string

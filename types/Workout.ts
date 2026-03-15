@@ -37,6 +37,7 @@ export type WorkoutLineWithDetails = WorkoutLine & {
   exercise: {
     id: string
     nom: string
+    svg: string | null
   },
   serie: Serie[]
 }
