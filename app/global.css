@@ -756,6 +756,10 @@ input {
     border-radius: var(--radius-15);
 }
 
+.notes{
+    font-size: 0.8rem;
+}
+
 /* Loading overlay styles */
 .loading-overlay {
     position: fixed;
