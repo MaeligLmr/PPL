@@ -484,6 +484,10 @@ select.ui-input:disabled {
   height: 100%;
 }
 
+.exercice-icon {
+    color : var(--theme-text);
+}
+
 .exercise-icon svg path,
 .exercise-icon svg rect,
 .exercise-icon svg circle,
