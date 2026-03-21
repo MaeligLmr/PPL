@@ -8,7 +8,7 @@ import { faChevronRight, faChevronDown, faPlus, faTrash } from "@fortawesome/fre
 import { useState, useEffect } from "react";
 import { addRep, deleteRep, editRep, deleteSerie, duplicateSet } from "@/services/workout.service";
 import { faClone } from "@fortawesome/free-solid-svg-icons";
-  
+
 
 export function SetRow({ set, onUpdate, workoutId }: { set: Serie, onUpdate?: () => void, workoutId: string }) {
   const [isExpanded, setIsExpanded] = useState(() => {
@@ -130,6 +130,13 @@ export function SetRow({ set, onUpdate, workoutId }: { set: Serie, onUpdate?: ()
           />
           <span>Série {set.ordre}</span>
         </div>
+
+        <Button
+          variant="icon-plain"
+          icon={<FontAwesomeIcon icon={faClone} />}
+          onClick={handleDuplicateSet}
+          disabled={isDuplicating}
+        />
         <Button
           variant="icon-plain"
           icon={<FontAwesomeIcon icon={faTrash} />}
@@ -137,12 +144,6 @@ export function SetRow({ set, onUpdate, workoutId }: { set: Serie, onUpdate?: ()
             e.stopPropagation();
             setShowDeleteConfirm(true);
           }}
-        />
-        <Button
-          variant="icon-plain"
-          icon={<FontAwesomeIcon icon={faClone} />}
-          onClick={handleDuplicateSet}
-          disabled={isDuplicating}
         />
       </div>
 
