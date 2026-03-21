@@ -102,7 +102,7 @@ export default function Select({
                   <div 
                     dangerouslySetInnerHTML={{ __html: option.icon }} 
                     style={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', flexShrink: 0, color: 'var(--theme-text)' }}
-                    className="custom-select-icon"
+                    className="exercise-icon"
                   />
                 )}
                 <span>{option.label}</span>
