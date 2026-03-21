@@ -73,7 +73,7 @@ export default function Select({
           {selectedOption?.icon && (
             <div 
               dangerouslySetInnerHTML={{ __html: selectedOption.icon }} 
-              style={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', flexShrink: 0 }}
+              style={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', flexShrink: 0, color: 'var(--theme-text)' }}
               className="custom-select-icon"
             />
           )}
@@ -101,7 +101,7 @@ export default function Select({
                 {option.icon && (
                   <div 
                     dangerouslySetInnerHTML={{ __html: option.icon }} 
-                    style={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', flexShrink: 0 }}
+                    style={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', flexShrink: 0, color: 'var(--theme-text)' }}
                     className="custom-select-icon"
                   />
                 )}

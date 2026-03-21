@@ -53,6 +53,7 @@ ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap : var(--spacing-10);
 }
 
 .p-4 {
@@ -67,6 +68,10 @@ ul {
 .py-4 {
     padding-top: var(--spacing-20);
     padding-bottom: var(--spacing-20);
+}
+
+.pt-4 {
+    padding-top: var(--spacing-20);
 }
 
 .content {
@@ -492,7 +497,7 @@ select.ui-input:disabled {
     border: none;
     background: transparent;
     padding: 6px 14px;
-    border-radius: var(--radius-10);
+    border-radius: 12px;
     cursor: pointer;
     font-weight: 600;
     color: var(--theme-toggle-item-text);

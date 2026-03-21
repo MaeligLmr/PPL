@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import {
+  getAllExercises,
   getExercisesWithPreferences,
   toggleExerciseHidden,
 } from "@/services/exercise.service";
@@ -26,7 +27,7 @@ export default function ExercisesPage() {
   const [loading, setLoading] = useState(true);
   
    function load() {
-    getExercisesWithPreferences().then((data) => setExercises(data as Exercise[])).catch(() => {toast.error("Erreur lors du chargement des exercices.")}).finally(() => setLoading(false));
+    getAllExercises().then((data) => setExercises(data as Exercise[])).catch(() => {toast.error("Erreur lors du chargement des exercices.")}).finally(() => setLoading(false));
     
   }
 
@@ -90,12 +91,22 @@ export default function ExercisesPage() {
                 height: '24px',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                color:'var(--theme-text)'
               }} 
               className="exercise-icon"
             />
           ) : null}
-          label={exo.nom + (exo.categories ? ` (${exo.categories.map(c => c.nom).join(", ")})` : "")}
+          label={
+            exo.nom + (
+              exo.categories
+                ? (() => {
+                    const cats = exo.categories.filter(c => c.nom !== 'FREE');
+                    return cats.length > 0 ? ` (${cats.map(c => c.nom).join(", ")})` : '';
+                  })()
+                : ''
+            )
+          }
           right={
             <Toggle
               options={[

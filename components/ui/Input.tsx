@@ -18,13 +18,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const hasValue = value !== undefined && value !== ''
     const isPassword = type === 'password'
 
+    // Pour les inputs type number, afficher une chaîne vide si la valeur est 0 ou '0'
+    const displayValue = type === 'number' && (value === 0 || value === '0') ? '' : value;
     return (
       <div className={["ui-input-container", fullWidth ? "ui-input-container--full" : ""].join(" ")}> 
         {label && <label className="ui-input-label">{label}</label>}
         <div style={{ position: 'relative', width: '100%' }}>
           <input
             ref={ref}
-            value={value}
+            value={displayValue}
             type={isPassword && showPassword ? 'text' : type}
             className={["ui-input", error ? "ui-input--error" : "", isFocused ? "ui-input--focus" : "", hasValue ? "ui-input--filled" : ""].join(" ")}
             style={{

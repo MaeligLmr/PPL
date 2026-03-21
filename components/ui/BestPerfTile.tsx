@@ -31,7 +31,8 @@ export function BestPerfTile({ perf }: Props) {
                 height: '24px',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                color:'var(--theme-text)'
               }}
               dangerouslySetInnerHTML={{ __html: perf.exo_svg }}
             ></div>

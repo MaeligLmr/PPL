@@ -104,7 +104,8 @@ export function ExerciseCard({ exercise, id_category, isNew, onExerciseUpdate, w
                     height: '24px',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    color:'var(--theme-text)'
                   }}
                   dangerouslySetInnerHTML={{ __html: exercise.exercise.svg }}
                 />

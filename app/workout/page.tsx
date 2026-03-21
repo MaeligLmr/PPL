@@ -2,15 +2,17 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
-import { addExerciseToWorkout, getWorkoutById, deleteWorkout } from '@/services/workout.service'
+import { addExerciseToWorkout, getWorkoutById, deleteWorkout, updateWorkoutNote } from '@/services/workout.service'
 import { WorkoutLineWithDetails, WorkoutWithDetails } from '@/types/Workout'
 import { usePageTitle } from '@/components/layout/PageTitleContext'
 import Button from '@/components/ui/Button'
 import { toast } from 'sonner'
 import ConfirmDialog from '@/components/ui/ConfirmDialog'
+import FormDialog from '@/components/ui/FormDialog'
+import Textarea from '@/components/ui/Textarea'
 import Loader from '@/components/ui/Loader'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faEllipsisVertical, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faEllipsisVertical, faTrash, faCommentDots } from '@fortawesome/free-solid-svg-icons'
 import { ExerciseCard } from '@/components/workout/ExerciceCard'
 
 export default function WorkoutPage() {
@@ -24,6 +26,21 @@ export default function WorkoutPage() {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
 
   const id = searchParams.get('workout')
+
+  const [showNoteDialog, setShowNoteDialog] = useState(false)
+  const [note, setNote] = useState<string>(workout?.note || '')
+  const [noteDraft, setNoteDraft] = useState<string>(note)
+  // Simule la sauvegarde de la note (à remplacer par un appel API réel)
+  const handleSaveNote = async () => {
+    setNote(noteDraft)
+    setShowNoteDialog(false)
+    updateWorkoutNote(id!, noteDraft).then(() => {
+    toast.success('Note enregistrée')
+    }).catch((err) => {
+      console.error('Erreur sauvegarde note:', err)
+      toast.error('Erreur lors de la sauvegarde de la note')
+    })
+  }
 
   const loadWorkout = useCallback(async () => {
     if (!id) return
@@ -165,6 +182,29 @@ export default function WorkoutPage() {
         onConfirm={handleDeleteWorkout}
         onCancel={() => setShowDeleteConfirm(false)}
       />
+      {/* Gros bouton arrondi en bas */}
+      <Button
+        variant="icon-filled"
+        size="lg"
+        className="fab-button"
+        aria-label="Modifier la note"
+        icon={<FontAwesomeIcon icon={faCommentDots} />}
+        onClick={() => setShowNoteDialog(true)}
+        style={{ position: 'fixed', right: 24, bottom: 24, zIndex: 100 }}
+      />
+      <FormDialog
+        isOpen={showNoteDialog}
+        title="Modifier la note de la séance"
+        onConfirm={handleSaveNote}
+        onCancel={() => setShowNoteDialog(false)}
+      >
+        <Textarea
+          label="Note"
+          value={noteDraft}
+          onChange={e => setNoteDraft(e.target.value)}
+          fullWidth
+        />
+      </FormDialog>
     </>
   )
 }

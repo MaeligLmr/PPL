@@ -3,6 +3,7 @@ export type Workout = {
   date: string
   id_category: string
   id_user: string
+  note : string | null
   categorie?: {
     id: number
     nom: string

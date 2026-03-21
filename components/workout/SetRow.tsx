@@ -6,7 +6,9 @@ import { toast } from "sonner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faChevronDown, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
-import { addRep, deleteRep, editRep, deleteSerie } from "@/services/workout.service";
+import { addRep, deleteRep, editRep, deleteSerie, duplicateSet } from "@/services/workout.service";
+import { faClone } from "@fortawesome/free-solid-svg-icons";
+  
 
 export function SetRow({ set, onUpdate, workoutId }: { set: Serie, onUpdate?: () => void, workoutId: string }) {
   const [isExpanded, setIsExpanded] = useState(() => {
@@ -21,12 +23,28 @@ export function SetRow({ set, onUpdate, workoutId }: { set: Serie, onUpdate?: ()
     const initial: { [key: string]: { charge: string, qte: string } } = {};
     set.reps?.forEach(rep => {
       initial[rep.id] = {
-        charge: rep.charge?.toString() || '0',
-        qte: rep.qte?.toString() || '0'
+        charge: rep.charge?.toString() || '',
+        qte: rep.qte?.toString() || ''
       };
     });
     return initial;
   });
+
+  const [isDuplicating, setIsDuplicating] = useState(false);
+  const handleDuplicateSet = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsDuplicating(true);
+    try {
+      await duplicateSet(set);
+      onUpdate?.();
+      toast.success("Série dupliquée");
+    } catch (error) {
+      console.error("Erreur lors de la duplication de la série:", error);
+      toast.error("Erreur lors de la duplication de la série");
+    } finally {
+      setIsDuplicating(false);
+    }
+  };
 
   const handleToggleExpanded = (value: boolean) => {
     setIsExpanded(value);
@@ -49,7 +67,7 @@ export function SetRow({ set, onUpdate, workoutId }: { set: Serie, onUpdate?: ()
     const numValue = field === 'charge' ? parseFloat(value) || 0 : parseInt(value) || 0;
     const currentRep = set.reps?.find(r => r.id === repId);
     if (currentRep) {
-      const currentValues = repValues[repId] || { charge: '0', qte: '0' };
+      const currentValues = repValues[repId] || { charge: '', qte: '' };
       const charge = field === 'charge' ? numValue : parseFloat(currentValues.charge) || 0;
       const qte = field === 'qte' ? numValue : parseInt(currentValues.qte) || 0;
       editRep(repId, charge, qte);
@@ -65,7 +83,7 @@ export function SetRow({ set, onUpdate, workoutId }: { set: Serie, onUpdate?: ()
         const newRep = newReps[newReps.length - 1];
         setRepValues(prev => ({
           ...prev,
-          [newRep.id]: { charge: '0', qte: '0' }
+          [newRep.id]: { charge: '', qte: '' }
         }));
       }
       onUpdate?.();
@@ -120,6 +138,12 @@ export function SetRow({ set, onUpdate, workoutId }: { set: Serie, onUpdate?: ()
             setShowDeleteConfirm(true);
           }}
         />
+        <Button
+          variant="icon-plain"
+          icon={<FontAwesomeIcon icon={faClone} />}
+          onClick={handleDuplicateSet}
+          disabled={isDuplicating}
+        />
       </div>
 
       {/* Détails des reps (collapsible) */}
@@ -127,8 +151,8 @@ export function SetRow({ set, onUpdate, workoutId }: { set: Serie, onUpdate?: ()
         <div className="reps-container">
           {set.reps?.map((rep) => {
             const repValue = repValues[rep.id] || {
-              charge: rep.charge?.toString() || '0',
-              qte: rep.qte?.toString() || '0'
+              charge: rep.charge === 0 ? '' : (rep.charge?.toString() || ''),
+              qte: rep.qte === 0 ? '' : (rep.qte?.toString() || '')
             };
 
             return (

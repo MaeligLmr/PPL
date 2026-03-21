@@ -1,5 +1,6 @@
+
 import { supabase } from "@/lib/supabase";
-import { Workout, WorkoutWithDetails } from "@/types/Workout";
+import { Workout, WorkoutWithDetails, Serie, Rep } from "@/types/Workout";
 
 export async function getUserWorkouts(userId: string) {
   const { data, error } = await supabase
@@ -240,4 +241,54 @@ export async function deleteSerie(serieId: string) {
 
     if (error) throw error;
     return data;
+}
+
+export async function duplicateSet(serie: Serie) {
+  const { id_workout_line, ordre, reps } = serie;
+  // Créer la nouvelle série avec le même id_workout_line et ordre + 1
+  const { data: newSet, error: setError } = await supabase
+    .from("serie")
+    .insert([
+      {
+        id_workout_line,
+        ordre: ordre + 1,
+      },
+    ])
+    .select()
+    .single();
+
+  if (setError) throw setError;
+
+  // Dupliquer chaque rep dans la nouvelle série
+  if (reps && reps.length > 0) {
+    const repsToInsert = reps.map((rep: Rep) => ({
+      id_serie: newSet.id,
+      charge: rep.charge,
+      qte: rep.qte,
+    }));
+    const { error: repError } = await supabase
+      .from("reps")
+      .insert(repsToInsert);
+    if (repError) throw repError;
+  } else {
+    // Si pas de reps, en créer une vide
+    await supabase.from("reps").insert([
+      { id_serie: newSet.id, charge: 0, qte: 0 },
+    ]);
+  }
+
+  return newSet;
+}
+
+export async function updateWorkoutNote(workoutId: string, note: string) {
+  const { data, error } = await supabase
+    .from("workout")
+    .update({
+      note,
+    })
+    .eq("id", workoutId)
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
 }
